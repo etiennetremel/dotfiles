@@ -1,0 +1,123 @@
+export DOTFILES=$HOME/.dotfiles
+export ZSH=$DOTFILES/zsh
+
+# initialize autocomplete
+autoload -U compinit
+compinit
+
+# https://github.com/sindresorhus/pure
+autoload -U promptinit && promptinit
+prompt pure
+
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=2000
+bindkey -e
+
+# History
+setopt HIST_VERIFY
+setopt EXTENDED_HISTORY
+setopt HIST_REDUCE_BLANKS
+setopt SHARE_HISTORY
+setopt HIST_IGNORE_ALL_DUPS
+setopt INC_APPEND_HISTORY SHARE_HISTORY
+setopt APPEND_HISTORY
+
+setopt COMPLETE_ALIASES
+
+export REPORTTIME=10
+
+export EDITOR='vim'
+export PATH="$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+
+export NVM_DIR="/home/etremel/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+
+# Plugins
+source $ZSH/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $ZSH/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+source $ZSH/plugins/pure/pure.zsh
+source $ZSH/plugins/oh-my-zsh/git/git.plugin.zsh
+
+
+#
+# Navigation
+#
+
+# Set word delimiter
+WORDCHARS='*?_[]~&;!#$%^<>'
+
+# make terminal command navigation sane again
+bindkey '^[[3~' delete-char
+bindkey ';3D' backward-word
+bindkey ';3C' forward-word
+bindkey ';5D' beginning-of-line
+bindkey '^[[H' beginning-of-line
+bindkey ';5C' end-of-line
+bindkey '^[[F' end-of-line
+
+# bind UP and DOWN arrow keys
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+# Custom bin
+export PATH="$PATH:/home/etremel/google-cloud-sdk/bin:/home/etremel/bin"
+
+#
+# Theme
+#
+
+# Base16 Shell
+if [ -z "$THEME" ]; then
+    # export THEME="base16-eighties"
+    export THEME="base16-default"
+fi
+if [ -z "$BACKGROUND" ]; then
+    export BACKGROUND="dark"
+fi
+
+BASE16_SHELL="$DOTFILES/config/base16-shell/$THEME.$BACKGROUND.sh"
+[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+
+
+#
+# Completion
+#
+
+# matches case insensitive for lowercase
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+
+# pasting with tabs doesn't perform completion
+zstyle ':completion:*' insert-tab pending
+
+# default to file completion
+zstyle ':completion:*' completer _expand _complete _files _correct _approximate
+
+
+#
+# Alias
+#
+
+# reload zsh config
+alias reload!='source ~/.zshrc'
+
+
+#
+# Functions
+#
+
+# set the background color to light
+function light() {
+    export BACKGROUND="light" && reload!
+}
+
+function dark() {
+    export BACKGROUND="dark" && reload!
+}
+
+# The next line updates PATH for the Google Cloud SDK.
+source '/home/etremel/google-cloud-sdk/path.zsh.inc'
+
+# The next line enables shell command completion for gcloud.
+source '/home/etremel/google-cloud-sdk/completion.zsh.inc'
