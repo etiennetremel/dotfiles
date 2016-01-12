@@ -1,120 +1,94 @@
-export DOTFILES=$HOME/.dotfiles
-export ZSH=$DOTFILES/zsh
+# Path to your oh-my-zsh installation.
+export ZSH=/home/etremel/.oh-my-zsh
 
-# initialize autocomplete
-autoload -U compinit
-compinit
+# Set name of the theme to load.
+# Look in ~/.oh-my-zsh/themes/
+# Optionally, if you set this to "random", it'll load a random theme each
+# time that oh-my-zsh is loaded.
+# ZSH_THEME="robbyrussell"
+ZSH_THEME="pure"
+# ZSH_THEME="ys"
 
-# https://github.com/sindresorhus/pure
-autoload -U promptinit && promptinit
-prompt pure
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
 
-HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=2000
-bindkey -e
+# Uncomment the following line to use hyphen-insensitive completion. Case
+# sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
 
-# History
-setopt HIST_VERIFY
-setopt EXTENDED_HISTORY
-setopt HIST_REDUCE_BLANKS
-setopt SHARE_HISTORY
-setopt HIST_IGNORE_ALL_DUPS
-setopt INC_APPEND_HISTORY SHARE_HISTORY
-setopt APPEND_HISTORY
+# Uncomment the following line to disable bi-weekly auto-update checks.
+# DISABLE_AUTO_UPDATE="true"
 
-setopt COMPLETE_ALIASES
+# Uncomment the following line to change how often to auto-update (in days).
+# export UPDATE_ZSH_DAYS=13
 
-export REPORTTIME=10
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
 
-export EDITOR='vim'
-export PATH="$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
 
-export NVM_DIR="/home/etremel/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
 
+# Uncomment the following line to display red dots whilst waiting for completion.
+# COMPLETION_WAITING_DOTS="true"
 
-# Plugins
-source $ZSH/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $ZSH/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
-source $ZSH/plugins/pure/pure.zsh
-source $ZSH/plugins/oh-my-zsh/git/git.plugin.zsh
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
 
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# HIST_STAMPS="mm/dd/yyyy"
 
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(docker git history-substring-search history nvm npm terraform tmux thefuck)
+
+# User configuration
+
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl"
+# export MANPATH="/usr/local/man:$MANPATH"
+
+source $ZSH/oh-my-zsh.sh
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
+
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+
+# ssh
+# export SSH_KEY_PATH="~/.ssh/dsa_id"
+
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
 #
-# Navigation
-#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# Set word delimiter
-WORDCHARS='*?_[]~&;!#$%^<>'
-
-# make terminal command navigation sane again
-bindkey '^[[3~' delete-char
-bindkey ';3D' backward-word
-bindkey ';3C' forward-word
-bindkey ';5D' beginning-of-line
-bindkey '^[[H' beginning-of-line
-bindkey ';5C' end-of-line
-bindkey '^[[F' end-of-line
-
-# bind UP and DOWN arrow keys
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
+EDITOR='nvim'
 
 # Custom bin
 export PATH="$PATH:/home/etremel/google-cloud-sdk/bin:/home/etremel/bin"
-
-#
-# Theme
-#
-
-# Base16 Shell
-if [ -z "$THEME" ]; then
-    # export THEME="base16-eighties"
-    export THEME="base16-default"
-fi
-if [ -z "$BACKGROUND" ]; then
-    export BACKGROUND="dark"
-fi
-
-BASE16_SHELL="$DOTFILES/config/base16-shell/$THEME.$BACKGROUND.sh"
-[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
-
-
-#
-# Completion
-#
-
-# matches case insensitive for lowercase
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-
-# pasting with tabs doesn't perform completion
-zstyle ':completion:*' insert-tab pending
-
-# default to file completion
-zstyle ':completion:*' completer _expand _complete _files _correct _approximate
-
-
-#
-# Alias
-#
-
-# reload zsh config
-alias reload!='source ~/.zshrc'
-
-
-#
-# Functions
-#
-
-# set the background color to light
-function light() {
-    export BACKGROUND="light" && reload!
-}
-
-function dark() {
-    export BACKGROUND="dark" && reload!
-}
 
 # The next line updates PATH for the Google Cloud SDK.
 source '/home/etremel/google-cloud-sdk/path.zsh.inc'

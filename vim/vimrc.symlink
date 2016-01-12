@@ -44,33 +44,33 @@ set completeopt+=longest
 " faster redrawing
 set ttyfast
 
+" Add full file path to existing statusline
+" set statusline+=%F
+
+if has('mouse')
+  set mouse=a
+endif
+
 " highlight conflicts
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 set hidden
 
-" NerdTree toggle with CTRL+N
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-map <C-n> :NERDTreeToggle<CR>
-"nmap <silent> <leader>k :NERDTreeToggle<cr>
-
 " Pan navigation
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-h> <C-w>h
-noremap <C-l> <C-w>l
+" noremap <C-j> <C-w>j
+" noremap <C-k> <C-w>k
+" noremap <C-h> <C-w>h
+" noremap <C-l> <C-w>l
 
-" <Ctrl-l> redraws the screen and removes any search highlighting.
-" nnoremap <silent> <C-l> :nohl<CR><C-l>
-noremap <F2> :nohl<CR><C-l>
+" Redraws the screen and removes any search highlighting.
+noremap <F4> :nohl<CR><C-l>
 
 " Gundo (undo plugin)
-noremap <F5> :GundoToggle<CR>
+noremap <F3> :GundoToggle<CR>
 
 " Autoformat
-noremap <F4> :!python -m json.tool<CR>
-noremap <F3> :Autoformat<CR>
+noremap <F5> :Autoformat<CR>
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => User Interface
@@ -111,10 +111,14 @@ set colorcolumn=120
 
 " Theme
 set encoding=utf8
-let base16colorspace=256  " Access colors present in 256 colorspace"
-set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors"
-execute "set background=".$BACKGROUND
-execute "colorscheme ".$THEME
+if $COLORTERM == 'gnome-terminal'
+  set t_Co=256
+endif
+
+" execute "colorscheme molokai"
+" let g:molokai_original = 1
+
+execute "colorscheme Tomorrow-Night-Bright"
 
 " switch syntax highlighting on
 syntax on
@@ -124,7 +128,7 @@ filetype plugin on
 au BufNewFile,BufRead *.es6 set filetype=javascript
 
 " show relative line numbers
-" set relativenumber
+set relativenumber
 
 set wrap "turn on line wrapping
 set wrapmargin=8 " wrap lines when coming within n characters from side
@@ -143,24 +147,24 @@ set cursorline " highlight current line
 
 " smart tab completion
 function! Smart_TabComplete()
-    let line = getline('.')                         " current line
+  let line = getline('.')                         " current line
 
-    let substr = strpart(line, -1, col('.')+1)      " from the start of the current
-    " line to one character right
-    " of the cursor
-    let substr = matchstr(substr, '[^ \t]*$')       " word till cursor
-    if (strlen(substr)==0)                          " nothing to match on empty string
-        return '\<tab>'
-    endif
-    let has_period = match(substr, '\.') != -1      " position of period, if any
-    let has_slash = match(substr, '\/') != -1       " position of slash, if any
-    if (!has_period && !has_slash)
-        return '\<C-X>\<C-P>'                         " existing text matching
-    elseif ( has_slash )
-        return '\<C-X>\<C-F>'                         " file matching
-    else
-        return '\<C-X>\<C-O>'                         " plugin matching
-    endif
+  let substr = strpart(line, -1, col('.')+1)      " from the start of the current
+  " line to one character right
+  " of the cursor
+  let substr = matchstr(substr, '[^ \t]*$')       " word till cursor
+  if (strlen(substr)==0)                          " nothing to match on empty string
+    return '\<tab>'
+  endif
+  let has_period = match(substr, '\.') != -1      " position of period, if any
+  let has_slash = match(substr, '\/') != -1       " position of slash, if any
+  if (!has_period && !has_slash)
+    return '\<C-X>\<C-P>'                         " existing text matching
+  elseif ( has_slash )
+    return '\<C-X>\<C-F>'                         " file matching
+  else
+    return '\<C-X>\<C-O>'                         " plugin matching
+  endif
 endfunction
 
 " Removes trailing spaces on file save
@@ -169,16 +173,22 @@ autocmd BufWritePre * :%s/\s\+$//e
 " vim-commentary key binding
 autocmd FileType apache setlocal commentstring=#\ %s
 
-
 " NERDTree
 let NERDTreeShowHidden=1
+autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+map <F2> :NERDTreeToggle<CR>
 
 " close NERDTree after a file is opened
 let g:NERDTreeQuitOnOpen=1
 
-" CtrlP ignore patterns
+" CtrlP config
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+" let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_regexp = 1
 let g:ctrlp_custom_ignore = {
-  \ 'dir': '\.git$\|node_modules$\|bower_components$\|\.hg$\|\.svn$',
-  \ 'file': '\.exe$\|\.so$'
-\}
+      \ 'dir': '\.git$\|node_modules$\|bower_components$\|\.hg$\|\.svn$',
+      \ 'file': '\.exe$\|\.so|\.min\.js$'
+      \}
+let g:ctrlp_mruf_case_sensitive = 0
 

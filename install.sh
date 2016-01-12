@@ -1,27 +1,22 @@
 #!/bin/bash
 
-PWD=$(pwd)
-ZSH=$PWD/zsh
-VIM=$PWD/vim
+echo "Installing dotfiles...."
 
-echo "Installing dotfiles"
+DOTFILES=$HOME/.dotfiles
 
-echo "Configuring zsh as default shell"
-chsh -s $(which zsh)
+echo -e "\nCreating symlinks"
+echo "=============================="
+linkables=$( find -H "$DOTFILES" -maxdepth 2 -name '*.symlink' )
+for file in $linkables ; do
+    target="$HOME/.$( basename $file ".symlink" )"
+    if [ -e $target ]; then
+        echo "~${target#$HOME} already exists... Skipping."
+    else
+        echo "Creating symlink for $file"
+        ln -s $file $target
+    fi
+done
 
-echo "Initializing submodule(s)"
-git submodule update --init --recursive
-
-echo "Initialise pure $ZSH/plugins/pure/pure.zsh"
-ln -s "$ZSH/plugins/pure/pure.zsh" /usr/share/zsh/site-functions/prompt_pure_setup
-ln -s "$ZSH/plugins/pure/async.zsh" /usr/share/zsh/site-functions/async
-
-source install/link.sh
-
-vim +PlugClean
-# mkdir -p $VIM/vim.symlink/colors
-# git clone https://github.com/VundleVim/Vundle.vim.git $VIM/vim.symlink/base16
-# cp $VIM/vim.symlink/base16/colors/*.vim $VIM/vim.symlink
-
+nvim +PlugClean
 
 echo "Done."
