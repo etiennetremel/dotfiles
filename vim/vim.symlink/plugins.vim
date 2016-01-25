@@ -1,19 +1,12 @@
 call plug#begin()
 
-" colorschemes
-" Plug 'chriskempson/base16-vim'
-Plug 'bling/vim-airline'
-
-" Define bundles via Github repos
-Plug 'tpope/vim-fugitive'
-Plug 'L9'
-
-" Plugins
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Chiel92/vim-autoformat'
+Plug 'L9'
 Plug 'Raimondi/delimitMate'
 Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
+Plug 'bling/vim-airline'
 Plug 'briandoll/change-inside-surroundings.vim'
 Plug 'christoomey/vim-sort-motion'
 Plug 'christoomey/vim-tmux-navigator'
@@ -21,13 +14,14 @@ Plug 'goldfeld/ctrlr.vim'
 Plug 'kien/ctrlp.vim'
 Plug 'mutewinter/dot_vim'
 Plug 'mv/mv-vim-nginx'
-Plug 'scrooloose/nerdtree'
+Plug 'numkil/ag.nvim' " improved search
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'sickill/vim-pasta' " context-aware pasting
 Plug 'simnalamburt/vim-mundo'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-ragtag'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sleuth' " detect indent style (tabs vs. spaces)

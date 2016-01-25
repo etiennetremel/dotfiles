@@ -26,8 +26,6 @@ set ignorecase
 set incsearch
 set smartcase
 
-set paste
-
 set backspace=indent,eol,start
 set noerrorbells
 set visualbell
@@ -63,13 +61,16 @@ set hidden
 " noremap <C-l> <C-w>l
 
 " Redraws the screen and removes any search highlighting.
-noremap <F4> :nohl<CR><C-l>
-
-" Gundo (undo plugin)
-noremap <F3> :GundoToggle<CR>
+noremap <F2> :nohl<CR><C-l>
 
 " Autoformat
-noremap <F5> :Autoformat<CR>
+noremap <F4> :Autoformat<CR>
+
+" Gundo (undo plugin)
+noremap <F5> :GundoToggle<CR>
+
+" Map start key separately from next key
+let g:multi_cursor_start_key='<F6>'
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -106,30 +107,6 @@ set visualbell
 set t_vb=
 set tm=500
 
-" set column at 120
-set colorcolumn=120
-
-" Theme
-set encoding=utf8
-if $COLORTERM == 'gnome-terminal'
-  set t_Co=256
-endif
-
-" execute "colorscheme molokai"
-" let g:molokai_original = 1
-
-execute "colorscheme Tomorrow-Night-Bright"
-
-" switch syntax highlighting on
-syntax on
-filetype plugin on
-
-" ES6 as JS file
-au BufNewFile,BufRead *.es6 set filetype=javascript
-
-" show relative line numbers
-set relativenumber
-
 set wrap "turn on line wrapping
 set wrapmargin=8 " wrap lines when coming within n characters from side
 set linebreak " set soft wrapping
@@ -139,6 +116,66 @@ set autoindent " automatically set indent of new line
 set smartindent
 
 set cursorline " highlight current line
+
+" set column at 120
+set colorcolumn=120
+
+" show relative line numbers
+set relativenumber
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Theme
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+set encoding=utf8
+if $COLORTERM == 'gnome-terminal'
+  set t_Co=256
+endif
+
+" Available colorscheme
+execute "colorscheme Tomorrow-Night-Bright"
+" execute "colorscheme Tomorrow-Night"
+" execute "colorscheme onedark"
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Syntax highlighting
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+syntax on
+filetype plugin on
+
+" ES6 as JS file
+au BufNewFile,BufRead *.es6 set filetype=javascript
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Plugins and customs cmd
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" vim-commentary key binding
+autocmd FileType apache setlocal commentstring=#\ %s
+
+" NERDTree
+let NERDTreeShowHidden=1
+autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+map <C-n> :NERDTreeToggle<CR>
+
+" close NERDTree after a file is opened
+let g:NERDTreeQuitOnOpen=1
+
+" CtrlP config
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+" let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_regexp = 1
+let g:ctrlp_custom_ignore = {
+      \ 'dir': '\.git$\|node_modules$\|bower_components$\|\.hg$\|\.svn$',
+      \ 'file': '\.exe$\|\.so|\.min\.js$'
+      \}
+let g:ctrlp_mruf_case_sensitive = 0
+
+" Removes trailing spaces on file save
+autocmd BufWritePre * :%s/\s\+$//e
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -166,29 +203,3 @@ function! Smart_TabComplete()
     return '\<C-X>\<C-O>'                         " plugin matching
   endif
 endfunction
-
-" Removes trailing spaces on file save
-autocmd BufWritePre * :%s/\s\+$//e
-
-" vim-commentary key binding
-autocmd FileType apache setlocal commentstring=#\ %s
-
-" NERDTree
-let NERDTreeShowHidden=1
-autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-map <F2> :NERDTreeToggle<CR>
-
-" close NERDTree after a file is opened
-let g:NERDTreeQuitOnOpen=1
-
-" CtrlP config
-let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-" let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_regexp = 1
-let g:ctrlp_custom_ignore = {
-      \ 'dir': '\.git$\|node_modules$\|bower_components$\|\.hg$\|\.svn$',
-      \ 'file': '\.exe$\|\.so|\.min\.js$'
-      \}
-let g:ctrlp_mruf_case_sensitive = 0
-

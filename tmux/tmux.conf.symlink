@@ -1,5 +1,29 @@
 set -g default-terminal "screen-256color"
+set -g status-utf8 on
+
 setw -g mode-keys vi
+
+# set scrollback history to 20k
+set -g history-limit 20000
+
+# Activity Monitoring
+setw -g monitor-activity off
+set -g visual-activity off
+
+
+#
+# Pane
+#
+
+# make window/pane index start with 1
+set -g base-index 1
+setw -g pane-base-index 1
+
+# Resize pane shortcuts
+bind -r H resize-pane -L 10
+bind -r J resize-pane -D 10
+bind -r K resize-pane -U 10
+bind -r L resize-pane -R 10
 
 # Smart pane switching with awareness of vim splits
 # See: https://github.com/christoomey/vim-tmux-navigator
@@ -9,3 +33,17 @@ bind -n C-j if-shell "$is_vim" "send-keys C-j" "select-pane -D"
 bind -n C-k if-shell "$is_vim" "send-keys C-k" "select-pane -U"
 bind -n C-l if-shell "$is_vim" "send-keys C-l" "select-pane -R"
 bind -n C-\ if-shell "$is_vim" "send-keys C-\\" "select-pane -l"
+
+# clear pane: prefix + Ctrl+l
+# bind-key -n C-l send-keys C-z \; send-keys " reset && fg > /dev/null" \; send-keys "Enter"
+
+
+# enable mouse support for switching panes/windows
+setw -g mouse on
+
+
+#
+# Color & Style Settings
+#
+
+source ~/.dotfiles/tmux/theme.sh

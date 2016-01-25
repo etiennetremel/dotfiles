@@ -7,7 +7,6 @@ export ZSH=/home/etremel/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 # ZSH_THEME="robbyrussell"
 ZSH_THEME="pure"
-# ZSH_THEME="ys"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -85,7 +84,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-EDITOR='nvim'
+export EDITOR='nvim'
 
 # Custom bin
 export PATH="$PATH:/home/etremel/google-cloud-sdk/bin:/home/etremel/bin"
@@ -95,3 +94,6 @@ source '/home/etremel/google-cloud-sdk/path.zsh.inc'
 
 # The next line enables shell command completion for gcloud.
 source '/home/etremel/google-cloud-sdk/completion.zsh.inc'
+
+# Aliases
+source '/home/etremel/.dotfiles/zsh/alias.zsh'
