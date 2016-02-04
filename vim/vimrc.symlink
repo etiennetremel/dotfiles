@@ -134,8 +134,8 @@ if $COLORTERM == 'gnome-terminal'
 endif
 
 " Available colorscheme
-execute "colorscheme Tomorrow-Night-Bright"
-" execute "colorscheme Tomorrow-Night"
+" execute "colorscheme Tomorrow-Night-Bright"
+execute "colorscheme Tomorrow-Night"
 " execute "colorscheme onedark"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -169,7 +169,7 @@ let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 " let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_regexp = 1
 let g:ctrlp_custom_ignore = {
-      \ 'dir': '\.git$\|node_modules$\|bower_components$\|\.hg$\|\.svn$',
+      \ 'dir': '\.git$\|node_modules$\|bower_components$\|\.hg$\|\.svn$\|cms$',
       \ 'file': '\.exe$\|\.so|\.min\.js$'
       \}
 let g:ctrlp_mruf_case_sensitive = 0

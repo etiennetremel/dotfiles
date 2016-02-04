@@ -1,3 +1,7 @@
+#
+# Tmux Config
+#
+
 set -g default-terminal "screen-256color"
 set -g status-utf8 on
 
@@ -47,3 +51,16 @@ setw -g mouse on
 #
 
 source ~/.dotfiles/tmux/theme.sh
+
+
+#
+# Plugins
+#
+
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-copycat'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+
+
+# Initialize TMUX plugin manager (keep this line at the very bottom)
+run '~/.tmux/plugins/tpm/tpm'

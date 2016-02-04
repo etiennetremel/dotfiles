@@ -1,3 +1,6 @@
 [submodule "tmux/tmux.symlink/plugins/tpm"]
 	path = tmux/tmux.symlink/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
+[submodule "vim/vim.symlink/autoload"]
+	path = vim/vim.symlink/autoload
+	url = https://github.com/junegunn/vim-plug.git
