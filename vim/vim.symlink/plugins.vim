@@ -1,9 +1,14 @@
 call plug#begin()
 
+function! DoRemote(arg)
+  UpdateRemotePlugins
+endfunction
+
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'L9'
 Plug 'Raimondi/delimitMate'
+Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
 Plug 'bling/vim-airline'
@@ -30,6 +35,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'vim-scripts/AnsiEsc.vim'
 Plug 'vim-scripts/lastpos.vim'
 Plug 'vim-scripts/sudo.vim'
+Plug 'zchee/deoplete-go', { 'do': 'make'}
 "Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " language-specific plugins

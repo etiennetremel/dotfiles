@@ -30,6 +30,12 @@ set backspace=indent,eol,start
 set noerrorbells
 set visualbell
 
+" Code folding
+" set foldmethod=indent
+" set foldnestmax=10
+" set nofoldenable
+" set foldlevel=2
+
 " Tab control
 set expandtab " insert spaces rather than tabs for <Tab>
 set smarttab " tab respects 'tabstop', 'shiftwidth', and 'softtabstop'
@@ -38,6 +44,10 @@ set softtabstop=2 " edit as if the tabs are 2 characters wide
 set shiftwidth=2 " number of spaces to use for indent and unindent
 set shiftround " round indent to a multiple of 'shiftwidth'
 set completeopt+=longest
+
+" Replace tabs with >------ characters
+set list
+set listchars=tab:>-
 
 " faster redrawing
 set ttyfast
@@ -107,7 +117,8 @@ set visualbell
 set t_vb=
 set tm=500
 
-set wrap "turn on line wrapping
+"set wrap "turn on line wrapping
+set formatoptions=l "prevents new/edited lines from breaking
 set wrapmargin=8 " wrap lines when coming within n characters from side
 set linebreak " set soft wrapping
 set showbreak=… " show ellipsis at breaking
@@ -173,6 +184,9 @@ let g:ctrlp_custom_ignore = {
       \ 'file': '\.exe$\|\.so|\.min\.js$'
       \}
 let g:ctrlp_mruf_case_sensitive = 0
+
+" Ag searching from your project root instead of the cwd
+let g:ag_working_path_mode="r"
 
 " Removes trailing spaces on file save
 autocmd BufWritePre * :%s/\s\+$//e

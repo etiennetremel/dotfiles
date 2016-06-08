@@ -3,7 +3,7 @@
 #
 
 set -g default-terminal "screen-256color"
-set -g status-utf8 on
+# set -g status-utf8 on
 
 setw -g mode-keys vi
 
@@ -24,10 +24,10 @@ set -g base-index 1
 setw -g pane-base-index 1
 
 # Resize pane shortcuts
-bind -r H resize-pane -L 10
-bind -r J resize-pane -D 10
-bind -r K resize-pane -U 10
-bind -r L resize-pane -R 10
+bind -r H resize-pane -L 50
+bind -r J resize-pane -D 50
+bind -r K resize-pane -U 50
+bind -r L resize-pane -R 50
 
 # Smart pane switching with awareness of vim splits
 # See: https://github.com/christoomey/vim-tmux-navigator
@@ -37,6 +37,11 @@ bind -n C-j if-shell "$is_vim" "send-keys C-j" "select-pane -D"
 bind -n C-k if-shell "$is_vim" "send-keys C-k" "select-pane -U"
 bind -n C-l if-shell "$is_vim" "send-keys C-l" "select-pane -R"
 bind -n C-\ if-shell "$is_vim" "send-keys C-\\" "select-pane -l"
+
+# Split window, using same directory
+bind '%' split-window -h -c '#{pane_current_path}'  # Split panes horizontal
+bind '"' split-window -v -c '#{pane_current_path}'  # Split panes vertically
+bind c new-window -c '#{pane_current_path}' # Create new window
 
 # clear pane: prefix + Ctrl+l
 # bind-key -n C-l send-keys C-z \; send-keys " reset && fg > /dev/null" \; send-keys "Enter"
@@ -58,8 +63,11 @@ source ~/.dotfiles/tmux/theme.sh
 #
 
 set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-continuum'
 set -g @plugin 'tmux-plugins/tmux-copycat'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'tmux-plugins/tmux-yank'
 
 
 # Initialize TMUX plugin manager (keep this line at the very bottom)

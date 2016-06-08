@@ -54,7 +54,7 @@ plugins=(docker git history-substring-search history nvm npm terraform tmux thef
 
 # User configuration
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/etremel/.gem/ruby/2.3.0/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -88,6 +88,7 @@ export EDITOR='nvim'
 
 # Custom bin
 export PATH="$PATH:/home/etremel/google-cloud-sdk/bin:/home/etremel/bin"
+export GOPATH="/home/etremel/workspace"
 
 # The next line updates PATH for the Google Cloud SDK.
 source '/home/etremel/google-cloud-sdk/path.zsh.inc'
@@ -97,3 +98,6 @@ source '/home/etremel/google-cloud-sdk/completion.zsh.inc'
 
 # Aliases
 source '/home/etremel/.dotfiles/zsh/alias.zsh'
+
+# Go to work directory
+cd ~/workspace/src/bitbucket.org/xivart

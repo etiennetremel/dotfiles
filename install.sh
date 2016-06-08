@@ -4,8 +4,9 @@ echo "Installing dotfiles...."
 
 DOTFILES=$HOME/.dotfiles
 
-echo -e "\nCreating symlinks"
-echo "=============================="
+echo "
+Creating symlinks
+==================================="
 linkables=$( find -H "$DOTFILES" -maxdepth 2 -name '*.symlink' )
 for file in $linkables ; do
     target="$HOME/.$( basename $file ".symlink" )"
@@ -20,3 +21,11 @@ done
 nvim +PlugClean
 
 echo "Done."
+
+echo "
+===================================
+ Install Tmux plugins:
+    1. enter tmux
+    2. press CTRL + B, I
+===================================
+"
