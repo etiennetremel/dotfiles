@@ -1,3 +1,2 @@
-tmux/tmux.symlink/resurrect/
-vim/vim.symlink/plugged/
-tmux/tmux.symlink/plugins/
+nvim/plugin/
+nvim/spell/

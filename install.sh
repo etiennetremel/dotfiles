@@ -1,31 +1,35 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-echo "Installing dotfiles...."
+set -e
 
-DOTFILES=$HOME/.dotfiles
+DOTFILES=$HOME/dotfiles
+
+# echo "Installing dependencies..."
+# brew install \
+#   fg \
+#   ripgrep \
+#   neovim
+#
+# echo "Installing python dependencies..."
+# python3 -m pip install --user --upgrade pynvim
+#
+# echo "Installing dotfiles..."
 
 echo "
 Creating symlinks
 ==================================="
-linkables=$( find -H "$DOTFILES" -maxdepth 2 -name '*.symlink' )
-for file in $linkables ; do
-    target="$HOME/.$( basename $file ".symlink" )"
-    if [ -e $target ]; then
-        echo "~${target#$HOME} already exists... Skipping."
-    else
-        echo "Creating symlink for $file"
-        ln -s $file $target
-    fi
-done
-
-nvim +PlugClean
+ln -s $DOTFILES/alacritty/ ~/.config/alacritty
+ln -s $DOTFILES/nvim/ ~/.config/nvim
+ln -s $DOTFILES/tmux.conf ~/.tmux.conf
 
 echo "Done."
 
 echo "
 ===================================
+ Install nvim plugins
+   $ nvim +PackerInstall
  Install Tmux plugins:
-    1. enter tmux
-    2. press CTRL + B, I
+   1. enter tmux
+   2. press CTRL + B, I
 ===================================
 "
