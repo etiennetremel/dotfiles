@@ -38,8 +38,4 @@ cmp.setup({
     { name = "nvim_lua" },
     { name = "path" },
   },
-  documentation = {
-    border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-    winhighlight = "NormalFloat:NormalFloat,FloatBorder:TelescopeBorder",
-  },
 })

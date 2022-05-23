@@ -1,9 +1,4 @@
 
-
-
-
-
-
 local lsp = require('lsp-zero')
 local cmp = require('cmp')
 

@@ -18,7 +18,7 @@ local function get_setup(name)
   return string.format('require("setup.%s")', name)
 end
 
-return require('packer').startup(function()
+return require('packer').startup(function(use)
   use { 'wbthomason/packer.nvim' }
 
   -- The Basics
@@ -31,10 +31,15 @@ return require('packer').startup(function()
     config = get_setup('nerdtree')
   }
   use {
-    'nvim-lualine/lualine.nvim',
-    event = 'VimEnter',
-    config = get_setup('lualine'),
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+    "nvim-lualine/lualine.nvim",
+    config = get_setup("lualine"),
+    requires = {
+      "kyazdani42/nvim-web-devicons",
+      {
+        'folke/tokyonight.nvim',
+        config = get_setup("tokyonight")
+      }
+    }
   }
   use {
     'ryanoasis/vim-devicons',
@@ -83,7 +88,6 @@ return require('packer').startup(function()
       "ray-x/lsp_signature.nvim",
     },
   }
-
 
   -- CMP
   use {
@@ -143,4 +147,10 @@ return require('packer').startup(function()
     'alexghergh/nvim-tmux-navigation',
     config = get_setup('tmux_navigation')
   }
+
+  -- Automatically set up your configuration after cloning packer.nvim
+  -- Put this at the end after all plugins
+  if packer_bootstrap then
+    require('packer').sync()
+  end
 end)
