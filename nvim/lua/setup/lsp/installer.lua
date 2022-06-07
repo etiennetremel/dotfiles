@@ -1,4 +1,3 @@
-
 local installer = require("nvim-lsp-installer.servers")
 local utils = require("utils")
 

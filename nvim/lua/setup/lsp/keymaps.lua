@@ -1,4 +1,3 @@
-
 local M = {}
 
 local whichkey = require("which-key")

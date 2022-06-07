@@ -30,14 +30,15 @@ return require('packer').startup(function(use)
     'preservim/nerdtree',
     config = get_setup('nerdtree')
   }
+
   use {
-    "nvim-lualine/lualine.nvim",
-    config = get_setup("lualine"),
+    'nvim-lualine/lualine.nvim',
+    config = get_setup('lualine'),
     requires = {
-      "kyazdani42/nvim-web-devicons",
+      'kyazdani42/nvim-web-devicons',
       {
         'folke/tokyonight.nvim',
-        config = get_setup("tokyonight")
+        config = get_setup('colorscheme')
       }
     }
   }
@@ -56,7 +57,7 @@ return require('packer').startup(function(use)
     run = 'make'
   }
   use { 'tpope/vim-fugitive' }
-  use { 'McAuleyPenney/tidy.nvim' } -- trailing whitespaces
+  use { 'mcauley-penney/tidy.nvim' } -- trailing whitespaces
   use {
     'airblade/vim-gitgutter',
     config = get_setup('gitgutter')
@@ -69,47 +70,46 @@ return require('packer').startup(function(use)
   -- Colorscheme
   use {
     'folke/tokyonight.nvim',
-    event = 'VimEnter',
-    config = get_setup('tokyonight')
+    config = get_setup('colorscheme')
   }
 
   -- Which-key
-  use { "folke/which-key.nvim" }
+  use { 'folke/which-key.nvim' }
 
   -- LSP
   use {
-    "neovim/nvim-lspconfig",
+    'neovim/nvim-lspconfig',
     opt = true,
-    event = "BufReadPre",
-    wants = { "cmp-nvim-lsp", "nvim-lsp-installer", "lsp_signature.nvim" },
-    config = get_setup("lsp.config"),
+    -- event = 'BufReadPre',
+    wants = { 'cmp-nvim-lsp', 'nvim-lsp-installer', 'lsp_signature.nvim' },
+    config = get_setup('lsp.config'),
     requires = {
-      "williamboman/nvim-lsp-installer",
-      "ray-x/lsp_signature.nvim",
+      'williamboman/nvim-lsp-installer',
+      'ray-x/lsp_signature.nvim',
     },
   }
 
   -- CMP
   use {
-    "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
+    'hrsh7th/nvim-cmp',
+    -- event = 'InsertEnter',
     opt = true,
-    config = get_setup("cmp"),
-    wants = { "LuaSnip" },
+    config = get_setup('cmp'),
+    -- wants = { 'LuaSnip' },
     requires = {
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-      "hrsh7th/cmp-nvim-lua",
-      "ray-x/cmp-treesitter",
-      "hrsh7th/cmp-cmdline",
-      "saadparwaiz1/cmp_luasnip",
-      "hrsh7th/cmp-nvim-lsp",
-      {
-        "L3MON4D3/LuaSnip",
-        wants = "friendly-snippets",
-        -- config = get_setup("luasnip"),
-      },
-      "rafamadriz/friendly-snippets",
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-nvim-lua',
+      'ray-x/cmp-treesitter',
+      'hrsh7th/cmp-cmdline',
+      -- 'saadparwaiz1/cmp_luasnip',
+      'hrsh7th/cmp-nvim-lsp',
+      -- {
+      --   'L3MON4D3/LuaSnip',
+      --   wants = 'friendly-snippets',
+      --   -- config = get_setup('luasnip'),
+      -- },
+      'rafamadriz/friendly-snippets',
     },
     disable = false,
   }
@@ -140,6 +140,10 @@ return require('packer').startup(function(use)
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
     config = get_setup('treesitter')
+  }
+  use {
+    'nvim-treesitter/nvim-treesitter-context',
+    config = get_setup('treesitter_context')
   }
 
   -- Tmux navigation
