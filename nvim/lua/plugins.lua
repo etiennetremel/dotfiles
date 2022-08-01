@@ -65,6 +65,13 @@ return require('packer').startup(function(use)
   use {
     'sjl/gundo.vim',
     config = get_setup('gundo')
+
+  }
+
+  -- Zen
+  use {
+    "folke/zen-mode.nvim",
+    config = get_setup('zen_mode')
   }
 
   -- Colorscheme
@@ -80,7 +87,7 @@ return require('packer').startup(function(use)
   use {
     'neovim/nvim-lspconfig',
     opt = true,
-    -- event = 'BufReadPre',
+    event = 'BufReadPre',
     wants = { 'cmp-nvim-lsp', 'nvim-lsp-installer', 'lsp_signature.nvim' },
     config = get_setup('lsp.config'),
     requires = {
@@ -92,7 +99,7 @@ return require('packer').startup(function(use)
   -- CMP
   use {
     'hrsh7th/nvim-cmp',
-    -- event = 'InsertEnter',
+    event = 'InsertEnter',
     opt = true,
     config = get_setup('cmp'),
     -- wants = { 'LuaSnip' },
@@ -102,13 +109,13 @@ return require('packer').startup(function(use)
       'hrsh7th/cmp-nvim-lua',
       'ray-x/cmp-treesitter',
       'hrsh7th/cmp-cmdline',
-      -- 'saadparwaiz1/cmp_luasnip',
+      'saadparwaiz1/cmp_luasnip',
       'hrsh7th/cmp-nvim-lsp',
-      -- {
-      --   'L3MON4D3/LuaSnip',
-      --   wants = 'friendly-snippets',
-      --   -- config = get_setup('luasnip'),
-      -- },
+      {
+        'L3MON4D3/LuaSnip',
+        wants = 'friendly-snippets',
+        config = get_setup('luasnip'),
+      },
       'rafamadriz/friendly-snippets',
     },
     disable = false,

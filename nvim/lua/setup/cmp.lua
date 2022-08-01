@@ -2,11 +2,11 @@ local cmp = require('cmp')
 local utils = require('utils')
 
 cmp.setup({
-  -- snippet = {
-  --   expand = function(args)
-  --    require('luasnip').lsp_expand(args.body)
-  --   end,
-  -- },
+  snippet = {
+    expand = function(args)
+     require('luasnip').lsp_expand(args.body)
+    end,
+  },
 
   mapping = {
     ['<Tab>'] = cmp.mapping(function(fallback)
@@ -34,8 +34,12 @@ cmp.setup({
     { name = "nvim_lsp" },
     { name = "treesitter" },
     { name = "buffer" },
-    -- { name = "luasnip" },
+    { name = "luasnip" },
     { name = "nvim_lua" },
     { name = "path" },
+  },
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
   },
 })

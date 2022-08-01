@@ -1,5 +1,7 @@
 local opt = vim.opt
 
+opt.termguicolors = true
+
 -- spell check
 opt.spell = true
 opt.spelllang = "en"
@@ -12,7 +14,7 @@ opt.swapfile = false
 opt.backup = false
 opt.incsearch = true
 opt.autoindent = true
-opt.hlsearch = false
+opt.hlsearch = true
 opt.scrolloff = 3
 opt.relativenumber = true
 opt.colorcolumn = "80"
