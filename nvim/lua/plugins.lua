@@ -57,7 +57,6 @@ return require('packer').startup(function(use)
     run = 'make'
   }
   use { 'tpope/vim-fugitive' }
-  use { 'mcauley-penney/tidy.nvim' } -- trailing whitespaces
   use {
     'airblade/vim-gitgutter',
     config = get_setup('gitgutter')
@@ -66,6 +65,12 @@ return require('packer').startup(function(use)
     'sjl/gundo.vim',
     config = get_setup('gundo')
 
+  }
+
+  -- trailing whitespacs
+  use {
+    'ntpeters/vim-better-whitespace',
+    config = get_setup('better_whitespace')
   }
 
   -- Zen
