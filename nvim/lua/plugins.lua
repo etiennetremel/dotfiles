@@ -75,8 +75,14 @@ return require('packer').startup(function(use)
 
   -- Zen
   use {
-    "folke/zen-mode.nvim",
+    'folke/zen-mode.nvim',
     config = get_setup('zen_mode')
+  }
+
+  -- Scroll direction visual feedback
+  use {
+    'gen740/SmoothCursor.nvim',
+    config = get_setup('smoothcursor')
   }
 
   -- Colorscheme
