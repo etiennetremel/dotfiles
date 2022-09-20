@@ -1,2 +1,2 @@
-require("zen-mode").setup({
+require('zen-mode').setup({
 })

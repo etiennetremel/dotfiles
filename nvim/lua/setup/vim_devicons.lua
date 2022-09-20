@@ -15,7 +15,7 @@ local pattern_symbols = {
   ['package.json'] = '',
   ['package.lock.json'] = '',
   ['node_modules'] = '',
-  ["webpack."] = 'ﰩ',
+  ['webpack.'] = 'ﰩ',
 }
 
 vim.g.WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = extension_symbols
