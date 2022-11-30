@@ -2,6 +2,10 @@ local opt = vim.opt
 
 opt.termguicolors = true
 
+-- disable netrw due to race conditions at vim startup
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- spell check
 opt.spell = true
 opt.spelllang = "en"

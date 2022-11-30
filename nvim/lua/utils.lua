@@ -1,22 +1,13 @@
--- Toggles NERDTree.
--- function nt_find()
---   vim.api.nvim_command("NERDTreeFind")
--- end
--- alias("nt_find", "F")
---
-_G.dump = function(...)
-  print(vim.inspect(...))
-end
-
-_G.prequire = function(...)
-  local status, lib = pcall(require, ...)
-  if status then
-    return lib
-  end
-  return nil
-end
-
 local M = {}
+
+function M.map(mode, mapping, cmd, options)
+  local opts = { noremap = true }
+  if options then
+    opts = vim.tbl_extend("force", opts, options)
+  end
+
+  vim.api.nvim_set_keymap(mode, mapping, cmd, opts)
+end
 
 -- Used to alias Lua functions to user-defined Vim commands.
 -- Example:

@@ -26,26 +26,39 @@ return require('packer').startup(function(use)
     'preservim/nerdcommenter',
     config = get_setup('nerdcommenter')
   }
-  use {
-    'preservim/nerdtree',
-    config = get_setup('nerdtree')
-  }
 
+  -- Bottom line
   use {
     'nvim-lualine/lualine.nvim',
     config = get_setup('lualine'),
     requires = {
-      'kyazdani42/nvim-web-devicons',
+      'nvim-tree/nvim-web-devicons',
       {
         'folke/tokyonight.nvim',
         config = get_setup('colorscheme')
       }
     }
   }
+
+  -- icons
   use {
     'ryanoasis/vim-devicons',
     config = get_setup('vim_devicons')
   }
+
+  -- file tree
+  use {
+    "nvim-tree/nvim-tree.lua",
+    config = get_setup("nvim_tree")
+  }
+
+  -- auto close opening brackets
+  use {
+    "windwp/nvim-autopairs",
+    config = get_setup('autopairs')
+  }
+
+  -- search
   use {
     'nvim-telescope/telescope.nvim',
     requires = { {'nvim-lua/plenary.nvim'} },
@@ -56,11 +69,21 @@ return require('packer').startup(function(use)
     config = get_setup('telescope_fzf_native'),
     run = 'make'
   }
-  use { 'tpope/vim-fugitive' }
+
+  -- git diff
+  use {
+    'sindrets/diffview.nvim',
+    config = get_setup('diffview'),
+    requires = 'nvim-lua/plenary.nvim'
+  }
+
+  -- git visual feedback
   use {
     'airblade/vim-gitgutter',
     config = get_setup('gitgutter')
   }
+
+  -- undo history
   use {
     'sjl/gundo.vim',
     config = get_setup('gundo')
@@ -98,8 +121,12 @@ return require('packer').startup(function(use)
   use {
     'neovim/nvim-lspconfig',
     opt = true,
-    event = 'BufReadPre',
-    wants = { 'cmp-nvim-lsp', 'nvim-lsp-installer', 'lsp_signature.nvim' },
+    event = 'BufReadPost',
+    wants = {
+      'cmp-nvim-lsp',
+      'nvim-lsp-installer',
+      'lsp_signature.nvim'
+    },
     config = get_setup('lsp.config'),
     requires = {
       'williamboman/nvim-lsp-installer',
@@ -107,29 +134,26 @@ return require('packer').startup(function(use)
     },
   }
 
-  -- CMP
+  -- Autocompletion
   use {
     'hrsh7th/nvim-cmp',
-    event = 'InsertEnter',
-    opt = true,
     config = get_setup('cmp'),
-    -- wants = { 'LuaSnip' },
     requires = {
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-path',
-      'hrsh7th/cmp-nvim-lua',
-      'ray-x/cmp-treesitter',
-      'hrsh7th/cmp-cmdline',
-      'saadparwaiz1/cmp_luasnip',
-      'hrsh7th/cmp-nvim-lsp',
+      {'hrsh7th/cmp-buffer', after = 'nvim-cmp'},
+      {'hrsh7th/cmp-path', after = 'nvim-cmp'},
+      {'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp'},
+      {'ray-x/cmp-treesitter', after = 'nvim-cmp'},
+      {'hrsh7th/cmp-cmdline', after = 'nvim-cmp'},
+      {'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp'},
+      {'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp'},
       {
         'L3MON4D3/LuaSnip',
         wants = 'friendly-snippets',
+        after = 'nvim-cmp',
         config = get_setup('luasnip'),
       },
-      'rafamadriz/friendly-snippets',
+      {'rafamadriz/friendly-snippets', after = 'nvim-cmp'},
     },
-    disable = false,
   }
 
   -- LSP Support
