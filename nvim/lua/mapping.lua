@@ -9,6 +9,9 @@ map(mode.visual_select, "<leader>ss", '"spell!<CR>')
 -- No highlight
 map(mode.normal, "<leader><CR>", ":nohlsearch<CR>")
 
+-- Diffview
+map(mode.normal, "<leader>g", ":DiffviewOpen<CR>")
+
 -- Copy/paste
 map(mode.visual_select, "<leader>c", '"*yy<CR>')
 map(mode.normal, "<leader>v", '"+p<CR>')
