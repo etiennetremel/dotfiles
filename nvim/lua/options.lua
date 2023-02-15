@@ -46,8 +46,8 @@ opt.tw = 0
 opt.fo = "cq"
 opt.wm = 0
 
-opt.ai = true   -- auto indent
-opt.si = true   -- smart indent
+opt.ai = true -- auto indent
+opt.si = true -- smart indent
 opt.wrap = true -- wrap lines
 opt.smartcase = true
 

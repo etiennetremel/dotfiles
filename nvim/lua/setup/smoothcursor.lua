@@ -1,1 +1,1 @@
-require('smoothcursor').setup()
+require("smoothcursor").setup()

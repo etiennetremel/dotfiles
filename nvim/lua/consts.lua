@@ -10,8 +10,8 @@ local consts = {
     insert = "i",
     insert_command_lang_arg = "l",
     command_line = "c",
-    terminal = "t"
-  }
+    terminal = "t",
+  },
 }
 
 return consts

@@ -1,21 +1,21 @@
-local mode = require('consts').modes
-local map = require('utils').map
+local mode = require("consts").modes
+local map = require("utils").map
 
-require('nvim-tree').setup {
+require("nvim-tree").setup {
   auto_reload_on_write = true,
-  sort_by = 'name',
+  sort_by = "name",
   filters = {
     dotfiles = false,
     custom = {
-      '^\\.git$',
-      '^\\.yarn$',
-      'node_modules'
-    }
+      "^\\.git$",
+      "^\\.yarn$",
+      "node_modules",
+    },
   },
   actions = {
     open_file = {
       quit_on_open = true,
-    }
+    },
   },
   git = {
     enable = true,
@@ -25,21 +25,21 @@ require('nvim-tree').setup {
     icons = {
       show = {
         file = false,
-      }
-    }
+      },
+    },
   },
   view = {
-    side = 'right',
+    side = "right",
     adaptive_size = true,
     centralize_selection = true,
     mappings = {
       custom_only = false,
       list = {
-        { key = '<CR>',    action = 'edit_no_picker' },
-      }
-    }
-  }
+        { key = "<CR>", action = "edit_no_picker" },
+      },
+    },
+  },
 }
 
-map(mode.normal, '<leader>nn', ':NvimTreeToggle<CR>')
-map(mode.normal, '<leader>nf', ':NvimTreeFindFileToggle<CR>')
+map(mode.normal, "<leader>nn", ":NvimTreeToggle<CR>")
+map(mode.normal, "<leader>nf", ":NvimTreeFindFileToggle<CR>")

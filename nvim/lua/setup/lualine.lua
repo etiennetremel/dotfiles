@@ -1,6 +1,6 @@
-require('lualine').setup{
+require("lualine").setup {
   options = {
-    theme = 'tokyonight'
+    theme = "tokyonight",
   },
-  extensions = {'nvim-tree'}
+  extensions = { "nvim-tree" },
 }
