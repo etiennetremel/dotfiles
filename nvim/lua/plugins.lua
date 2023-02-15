@@ -49,6 +49,7 @@ return require('packer').startup(function(use)
   -- file tree
   use {
     "nvim-tree/nvim-tree.lua",
+    commit = "8b8d457",
     config = get_setup("nvim_tree")
   }
 
@@ -114,24 +115,28 @@ return require('packer').startup(function(use)
     config = get_setup('colorscheme')
   }
 
+  -- auto format
+  -- use { 'mhartington/formatter.nvim' }
+
   -- Which-key
   use { 'folke/which-key.nvim' }
+
+  -- Improved rust experience
+  use { 'simrat39/rust-tools.nvim' }
 
   -- LSP
   use {
     'neovim/nvim-lspconfig',
-    opt = true,
-    event = 'BufReadPost',
-    wants = {
-      'cmp-nvim-lsp',
-      'nvim-lsp-installer',
-      'lsp_signature.nvim'
-    },
-    config = get_setup('lsp.config'),
     requires = {
-      'williamboman/nvim-lsp-installer',
+      {'williamboman/mason-lspconfig.nvim', requires = "williamboman/mason.nvim" },
+      'williamboman/mason.nvim',
       'ray-x/lsp_signature.nvim',
+      'cmp-nvim-lsp',
+      'lsp_signature.nvim',
     },
+    wants = {
+    },
+    config = get_setup('mason_lsp')
   }
 
   -- Autocompletion
@@ -155,27 +160,6 @@ return require('packer').startup(function(use)
       {'rafamadriz/friendly-snippets', after = 'nvim-cmp'},
     },
   }
-
-  -- LSP Support
-  -- use { 'VonHeikemen/lsp-zero.nvim' }
-  -- use { 'williamboman/nvim-lsp-installer' }
-  -- -- use { 'ray-x/lsp_signature.nvim' } -- show functions signature
-  -- use {
-  --   'neovim/nvim-lspconfig',
-  --   config = get_setup('lsp')
-  -- }
-
-  -- Autocompletion
-  -- use { 'hrsh7th/nvim-cmp' }
-  -- use { 'hrsh7th/cmp-buffer' }
-  -- use { 'hrsh7th/cmp-path' }
-  -- use { 'saadparwaiz1/cmp_luasnip' }
-  -- use { 'hrsh7th/cmp-nvim-lsp' }
-  -- use { 'hrsh7th/cmp-nvim-lua' }
-
-  -- Snippets
-  -- use { 'L3MON4D3/LuaSnip' }
-  -- use { 'rafamadriz/friendly-snippets' }
 
   -- Treesitter
   use {

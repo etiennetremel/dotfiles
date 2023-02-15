@@ -17,9 +17,6 @@ map(mode.normal, '<leader>v', '"+p<CR>')
 map(mode.normal, "<leader>n", "gt")
 map(mode.normal, "<leader>N", "gT")
 
--- Equalize pane widths
-map(mode.normal, "<leader>=", "<C-W><C-=>")
-
 -- Gundo
 map(mode.normal, "<F5>", ":GundoToggle<CR>")
 
