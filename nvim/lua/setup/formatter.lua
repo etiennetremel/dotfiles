@@ -24,27 +24,17 @@ require("formatter").setup {
       require("formatter.filetypes.typescript").prettier,
     },
 
-    sh = {
-      require("formatter.filetypes.sh").shfmt,
-    },
-
     terraform = {
-      function()
-        return {
-          exe = "terraform",
-          args = { "fmt", "-" },
-          stdin = true,
-        }
-      end,
+      require("formatter.filetypes.terraform").terraformfmt,
     },
 
     python = {
       require("formatter.filetypes.python").black,
     },
 
-    yaml = {
-      require("formatter.filetypes.yaml").pyaml,
-    },
+    -- yaml = {
+    --   require("formatter.filetypes.yaml").pyaml,
+    -- },
 
     -- Use the special "*" filetype for defining formatter configurations on
     -- any filetype

@@ -64,5 +64,7 @@ opt.autoread = true
 -- use undo file to keep history across sessions
 opt.undofile = true
 
--- insert mode completion
-opt.completeopt = "menu,menuone,noselect"
+-- better completion experience
+opt.completeopt = { "menuone", "noselect", "noinsert" }
+opt.shortmess = opt.shortmess + { c = true }
+vim.api.nvim_set_option("updatetime", 300)

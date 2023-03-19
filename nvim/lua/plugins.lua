@@ -103,6 +103,12 @@ return require("packer").startup(function(use)
     config = get_setup "better_whitespace",
   }
 
+  -- indentation visual feedback
+  use {
+    "lukas-reineke/indent-blankline.nvim",
+    config = get_setup "indent",
+  }
+
   -- Zen
   use {
     "folke/zen-mode.nvim",
@@ -148,25 +154,34 @@ return require("packer").startup(function(use)
     config = get_setup "mason_lsp",
   }
 
+  -- GitHub Copilot
+  use {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = get_setup "copilot",
+  }
+
   -- Autocompletion
   use {
     "hrsh7th/nvim-cmp",
     config = get_setup "cmp",
     requires = {
+      { "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" },
+      { "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-cmp" },
       { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
       { "hrsh7th/cmp-path", after = "nvim-cmp" },
       { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
       { "ray-x/cmp-treesitter", after = "nvim-cmp" },
-      { "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
-      { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
-      { "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" },
+      { "hrsh7th/cmp-vsnip", after = "nvim-cmp" },
+      { "hrsh7th/vim-vsnip", after = "nvim-cmp" },
       {
-        "L3MON4D3/LuaSnip",
-        wants = "friendly-snippets",
-        after = "nvim-cmp",
-        config = get_setup "luasnip",
+        "zbirenbaum/copilot-cmp",
+        after = { "copilot.lua" },
+        config = function()
+          require("copilot_cmp").setup()
+        end,
       },
-      { "rafamadriz/friendly-snippets", after = "nvim-cmp" },
     },
   }
 

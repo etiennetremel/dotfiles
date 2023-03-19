@@ -1,4 +1,5 @@
-require("autocmds")
-require("options")
-require("plugins")
-require("mapping")
+require "diagnostic"
+require "autocmds"
+require "options"
+require "plugins"
+require "mapping"

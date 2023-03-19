@@ -7,3 +7,12 @@ vim.cmd [[
   autocmd FileType go :setlocal sw=4 ts=4 sts=4
   autocmd FileType rust :setlocal sw=4 ts=4 sts=4
 ]]
+
+-- Fixed column for diagnostics to appear
+-- Show autodiagnostic popup on cursor hover_range
+-- Goto previous / next diagnostic warning / error
+-- Show inlay_hints more frequently
+vim.cmd [[
+  set signcolumn=yes
+  autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
+]]
