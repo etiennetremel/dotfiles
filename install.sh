@@ -8,6 +8,10 @@ DOTFILES=$HOME/dotfiles
 # brew install \
 #   fg \
 #   ripgrep \
+#   fzf \
+#   zsh-autosuggestions \
+#   zsh-history-substring-search \
+#   starship \
 #   neovim
 #
 # echo "Installing python dependencies..."
