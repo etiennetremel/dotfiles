@@ -1,210 +1,259 @@
--- autocompile
-vim.cmd [[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-  augroup end
-]]
-
--- auto bootstrap
-local fn = vim.fn
-local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
-if fn.empty(fn.glob(install_path)) > 0 then
-  packer_bootstrap = fn.system {
+local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system {
     "git",
     "clone",
-    "--depth",
-    "1",
-    "https://github.com/wbthomason/packer.nvim",
-    install_path,
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
   }
 end
+vim.opt.rtp:prepend(lazypath)
 
--- setup file
-local function get_setup(name)
-  return string.format('require("setup.%s")', name)
-end
-
-return require("packer").startup(function(use)
-  use { "wbthomason/packer.nvim" }
-
-  -- The Basics
-  use {
-    "preservim/nerdcommenter",
-    config = get_setup "nerdcommenter",
-  }
-
-  -- Bottom line
-  use {
-    "nvim-lualine/lualine.nvim",
-    config = get_setup "lualine",
-    requires = {
-      "nvim-tree/nvim-web-devicons",
-      {
-        "folke/tokyonight.nvim",
-        config = get_setup "colorscheme",
+require("lazy").setup {
+  -- Comments
+  { "JoosepAlviste/nvim-ts-context-commentstring", lazy = true },
+  {
+    "echasnovski/mini.comment",
+    event = "VeryLazy",
+    opts = {
+      mappings = {
+        comment = "<leader>c<space>",
+        comment_line = "<leader>cc",
+        textobject = "<leader>c<space>",
       },
     },
-  }
+    config = function(_, opts)
+      require("mini.comment").setup(opts)
+    end,
+  },
+
+  -- Bottom line
+  {
+    "nvim-lualine/lualine.nvim",
+    config = function()
+      require "setup.lualine"
+    end,
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+      "folke/tokyonight.nvim",
+    },
+  },
 
   -- icons
-  use {
+  {
     "ryanoasis/vim-devicons",
-    config = get_setup "vim_devicons",
-  }
+    config = function()
+      require "setup.vim_devicons"
+    end,
+  },
 
   -- file tree
-  use {
+  {
     "nvim-tree/nvim-tree.lua",
-    commit = "8b8d457",
-    config = get_setup "nvim_tree",
-  }
+    event = "VeryLazy",
+    config = function()
+      require "setup.nvim_tree"
+    end,
+  },
 
   -- auto close opening brackets
-  use {
+  {
     "windwp/nvim-autopairs",
-    config = get_setup "autopairs",
-  }
+    event = "VeryLazy",
+    config = function()
+      require "setup.autopairs"
+    end,
+  },
 
   -- search
-  use {
+  {
     "nvim-telescope/telescope.nvim",
-    requires = { { "nvim-lua/plenary.nvim" } },
-    config = get_setup "telescope",
-  }
-  use {
+    dependencies = {
+      { "nvim-telescope/telescope-fzf-native.nvim" },
+      { "nvim-lua/plenary.nvim" },
+    },
+    config = function()
+      require "setup.telescope"
+    end,
+  },
+  {
     "nvim-telescope/telescope-fzf-native.nvim",
-    config = get_setup "telescope_fzf_native",
-    run = "make",
-  }
+    config = function()
+      require "setup.telescope_fzf_native"
+    end,
+    build = "make",
+  },
 
   -- git diff
-  use {
+  {
     "sindrets/diffview.nvim",
-    config = get_setup "diffview",
-    requires = "nvim-lua/plenary.nvim",
-  }
+    event = "VeryLazy",
+    config = function()
+      require "setup.diffview"
+    end,
+    dependencies = "nvim-lua/plenary.nvim",
+  },
 
   -- git visual feedback
-  use {
+  {
     "airblade/vim-gitgutter",
-    config = get_setup "gitgutter",
-  }
+    config = function()
+      require "setup.gitgutter"
+    end,
+  },
 
   -- undo history
-  use {
+  {
     "sjl/gundo.vim",
-    config = get_setup "gundo",
-  }
+    event = "VeryLazy",
+    config = function()
+      require "setup.gundo"
+    end,
+  },
 
   -- trailing whitespacs
-  use {
+  {
     "ntpeters/vim-better-whitespace",
-    config = get_setup "better_whitespace",
-  }
+    event = "VeryLazy",
+    config = function()
+      require "setup.better_whitespace"
+    end,
+  },
 
   -- indentation visual feedback
-  use {
+  {
     "lukas-reineke/indent-blankline.nvim",
-    config = get_setup "indent",
-  }
+    config = function()
+      require "setup.indent"
+    end,
+  },
 
   -- Zen
-  use {
+  {
     "folke/zen-mode.nvim",
-    config = get_setup "zen_mode",
-  }
+    event = "VeryLazy",
+    config = function()
+      require "setup.zen_mode"
+    end,
+  },
 
   -- Scroll direction visual feedback
-  use {
+  {
     "gen740/SmoothCursor.nvim",
-    config = get_setup "smoothcursor",
-  }
+    event = "VeryLazy",
+    config = function()
+      require "setup.smoothcursor"
+    end,
+  },
 
   -- Colorscheme
-  use {
+  {
     "folke/tokyonight.nvim",
-    config = get_setup "colorscheme",
-  }
+    config = function()
+      require "setup.colorscheme"
+    end,
+  },
 
   -- auto format
-  use {
+  {
     "mhartington/formatter.nvim",
-    config = get_setup "formatter",
-  }
+    event = "VeryLazy",
+    config = function()
+      require "setup.formatter"
+    end,
+  },
 
   -- Which-key
-  use { "folke/which-key.nvim" }
+  { "folke/which-key.nvim", event = "VeryLazy" },
 
   -- Improved rust experience
-  use { "simrat39/rust-tools.nvim" }
+  { "simrat39/rust-tools.nvim", event = "VeryLazy" },
 
   -- LSP
-  use {
+  {
     "neovim/nvim-lspconfig",
-    requires = {
+    dependencies = {
       {
         "williamboman/mason-lspconfig.nvim",
-        requires = "williamboman/mason.nvim",
+        dependencies = "williamboman/mason.nvim",
       },
       "williamboman/mason.nvim",
       "ray-x/lsp_signature.nvim",
       "hrsh7th/cmp-nvim-lsp",
     },
-    config = get_setup "mason_lsp",
-  }
+    config = function()
+      require "setup.mason_lsp"
+    end,
+  },
 
   -- GitHub Copilot
-  use {
+  {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
     event = "InsertEnter",
-    config = get_setup "copilot",
-  }
+    config = function()
+      require "setup.copilot"
+    end,
+  },
 
   -- Autocompletion
-  use {
+  {
     "hrsh7th/nvim-cmp",
-    config = get_setup "cmp",
-    requires = {
-      { "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" },
-      { "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-cmp" },
-      { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
-      { "hrsh7th/cmp-path", after = "nvim-cmp" },
-      { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
-      { "ray-x/cmp-treesitter", after = "nvim-cmp" },
-      { "hrsh7th/cmp-vsnip", after = "nvim-cmp" },
-      { "hrsh7th/vim-vsnip", after = "nvim-cmp" },
+    event = "VeryLazy",
+    config = function()
+      require "setup.cmp"
+    end,
+    dependencies = {
+      { "hrsh7th/cmp-nvim-lsp", dependencies = "nvim-cmp" },
+      { "hrsh7th/cmp-nvim-lsp-signature-help", dependencies = "nvim-cmp" },
+      { "hrsh7th/cmp-buffer", dependencies = "nvim-cmp" },
+      { "hrsh7th/cmp-path", dependencies = "nvim-cmp" },
+      { "hrsh7th/cmp-nvim-lua", dependencies = "nvim-cmp" },
+      { "ray-x/cmp-treesitter", dependencies = "nvim-cmp" },
+      { "hrsh7th/cmp-vsnip", dependencies = "nvim-cmp" },
+      { "hrsh7th/vim-vsnip", dependencies = "nvim-cmp" },
       {
         "zbirenbaum/copilot-cmp",
-        after = { "copilot.lua" },
+        dependencies = { "copilot.lua" },
         config = function()
           require("copilot_cmp").setup()
         end,
       },
     },
-  }
+  },
 
   -- Treesitter
-  use {
+  {
     "nvim-treesitter/nvim-treesitter",
-    run = ":TSUpdate",
-    config = get_setup "treesitter",
-  }
-  use {
+    build = ":TSUpdate",
+    config = function()
+      require "setup.treesitter"
+    end,
+  },
+  {
     "nvim-treesitter/nvim-treesitter-context",
-    config = get_setup "treesitter_context",
-  }
+    config = function()
+      require "setup.treesitter_context"
+    end,
+  },
 
   -- Tmux navigation
-  use {
+  {
     "alexghergh/nvim-tmux-navigation",
-    config = get_setup "tmux_navigation",
-  }
+    config = function()
+      require "setup.tmux_navigation"
+    end,
+  },
 
-  -- Automatically set up your configuration after cloning packer.nvim
-  -- Put this at the end after all plugins
-  if packer_bootstrap then
-    require("packer").sync()
-  end
-end)
+  -- Todo comments
+  {
+    "folke/todo-comments.nvim",
+    event = "VeryLazy",
+    dependencies = "nvim-lua/plenary.nvim",
+    config = function()
+      require "setup.todo_comments"
+    end,
+  },
+}

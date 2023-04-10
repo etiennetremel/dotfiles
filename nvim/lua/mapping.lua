@@ -30,5 +30,9 @@ map(mode.normal, "<leader>s", ":Telescope grep_string<CR>")
 map(mode.normal, "<leader>b", ":Telescope buffers<CR>")
 map(mode.normal, "<leader>h", ":Telescope help_tags<CR>")
 
+-- Nvim Tree
+map(mode.normal, "<leader>nn", ":NvimTreeToggle<CR>")
+map(mode.normal, "<leader>nf", ":NvimTreeFindFileToggle<CR>")
+
 -- ZenMode
 map(mode.normal, "<leader>z", ":ZenMode<CR>")

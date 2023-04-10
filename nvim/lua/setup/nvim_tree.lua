@@ -1,6 +1,3 @@
-local mode = require("consts").modes
-local map = require("utils").map
-
 require("nvim-tree").setup {
   auto_reload_on_write = true,
   sort_by = "name",
@@ -40,6 +37,3 @@ require("nvim-tree").setup {
     },
   },
 }
-
-map(mode.normal, "<leader>nn", ":NvimTreeToggle<CR>")
-map(mode.normal, "<leader>nf", ":NvimTreeFindFileToggle<CR>")

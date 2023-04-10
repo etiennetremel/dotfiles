@@ -1,12 +1,14 @@
 local M = {}
 
-function M.map(mode, mapping, cmd, options)
-  local opts = { noremap = true }
-  if options then
-    opts = vim.tbl_extend("force", opts, options)
+function M.map(mode, lhs, rhs, opts)
+  local keys = require("lazy.core.handler").handlers.keys
+  ---@cast keys LazyKeysHandler
+  -- do not create the keymap if a lazy keys handler exists
+  if not keys.active[keys.parse({ lhs, mode = mode }).id] then
+    opts = opts or {}
+    opts.silent = opts.silent ~= false
+    vim.keymap.set(mode, lhs, rhs, opts)
   end
-
-  vim.api.nvim_set_keymap(mode, mapping, cmd, opts)
 end
 
 -- Used to alias Lua functions to user-defined Vim commands.
