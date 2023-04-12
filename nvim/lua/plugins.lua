@@ -12,26 +12,22 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup {
-  -- Comments
-  { "JoosepAlviste/nvim-ts-context-commentstring", lazy = true },
+  -- comments
   {
-    "echasnovski/mini.comment",
+    "numToStr/Comment.nvim",
     event = "VeryLazy",
-    opts = {
-      mappings = {
-        comment = "<leader>c<space>",
-        comment_line = "<leader>cc",
-        textobject = "<leader>c<space>",
-      },
+    dependencies = {
+      "JoosepAlviste/nvim-ts-context-commentstring",
     },
-    config = function(_, opts)
-      require("mini.comment").setup(opts)
+    config = function()
+      require "setup.comment"
     end,
   },
 
-  -- Bottom line
+  -- bottom line
   {
     "nvim-lualine/lualine.nvim",
+    event = "VeryLazy",
     config = function()
       require "setup.lualine"
     end,
@@ -44,6 +40,7 @@ require("lazy").setup {
   -- icons
   {
     "ryanoasis/vim-devicons",
+    event = "VeryLazy",
     config = function()
       require "setup.vim_devicons"
     end,
@@ -70,6 +67,7 @@ require("lazy").setup {
   -- search
   {
     "nvim-telescope/telescope.nvim",
+    event = "VeryLazy",
     dependencies = {
       { "nvim-telescope/telescope-fzf-native.nvim" },
       { "nvim-lua/plenary.nvim" },
@@ -79,6 +77,7 @@ require("lazy").setup {
     end,
   },
   {
+    event = "VeryLazy",
     "nvim-telescope/telescope-fzf-native.nvim",
     config = function()
       require "setup.telescope_fzf_native"
@@ -99,6 +98,7 @@ require("lazy").setup {
   -- git visual feedback
   {
     "airblade/vim-gitgutter",
+    event = "VeryLazy",
     config = function()
       require "setup.gitgutter"
     end,

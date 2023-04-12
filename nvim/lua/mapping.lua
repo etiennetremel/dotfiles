@@ -16,6 +16,14 @@ map(mode.normal, "<leader>g", ":DiffviewOpen<CR>")
 map(mode.visual_select, "<leader>c", '"*yy<CR>')
 map(mode.normal, "<leader>v", '"+p<CR>')
 
+-- Comments
+map(
+  mode.visual_select,
+  "<leader>c<space>",
+  "<Plug>(comment_toggle_linewise_visual)"
+)
+map(mode.normal, "<leader>c<space>", "<Plug>(comment_toggle_linewise_current)")
+
 -- Tab nav
 map(mode.normal, "<leader>n", "gt")
 map(mode.normal, "<leader>N", "gT")
