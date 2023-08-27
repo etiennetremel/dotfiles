@@ -49,18 +49,8 @@ require("lazy").setup {
   -- file tree
   {
     "nvim-tree/nvim-tree.lua",
-    event = "VeryLazy",
     config = function()
       require "setup.nvim_tree"
-    end,
-  },
-
-  -- auto close opening brackets
-  {
-    "windwp/nvim-autopairs",
-    event = "VeryLazy",
-    config = function()
-      require "setup.autopairs"
     end,
   },
 
@@ -125,6 +115,7 @@ require("lazy").setup {
   -- indentation visual feedback
   {
     "lukas-reineke/indent-blankline.nvim",
+    event = "VeryLazy",
     config = function()
       require "setup.indent"
     end,
@@ -168,12 +159,40 @@ require("lazy").setup {
   -- Which-key
   { "folke/which-key.nvim", event = "VeryLazy" },
 
+  -- Test report/coverage
+  -- {
+  --   "nvim-neotest/neotest",
+  --   event = "VeryLazy",
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --     "nvim-treesitter/nvim-treesitter",
+  --     "antoinemadec/FixCursorHold.nvim",
+  --     "haydenmeade/neotest-jest",
+  --   },
+  --   config = function()
+  --     require("neotest").setup {
+  --       adapters = {
+  --         require "neotest-jest" {
+  --           jestCommand = "yarn test",
+  --           -- jestConfigFile = "custom.jest.config.ts",
+  --           env = { CI = true },
+  --           cwd = function(path)
+  --             return vim.fn.getcwd()
+  --           end,
+  --         },
+  --       },
+  --     }
+  --   end,
+  -- },
+
   -- Improved rust experience
-  { "simrat39/rust-tools.nvim", event = "VeryLazy" },
+  -- { "simrat39/rust-tools.nvim", event = "VeryLazy" },
+  { "rust-lang/rust.vim", event = "VeryLazy" },
 
   -- LSP
   {
     "neovim/nvim-lspconfig",
+    event = "VeryLazy",
     dependencies = {
       {
         "williamboman/mason-lspconfig.nvim",
@@ -219,6 +238,14 @@ require("lazy").setup {
         dependencies = { "copilot.lua" },
         config = function()
           require("copilot_cmp").setup()
+        end,
+      },
+
+      -- auto close opening brackets
+      {
+        "windwp/nvim-autopairs",
+        config = function()
+          require "setup.autopairs"
         end,
       },
     },

@@ -19,17 +19,25 @@ cmp.setup {
     end,
   },
 
+  completion = {
+    completeopt = "menu,menuone,noinsert",
+  },
+
   mapping = cmp.mapping.preset.insert {
     ["<CR>"] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
       select = false,
     },
-    ["<C-p>"] = cmp.mapping.select_prev_item(),
-    ["<C-n>"] = cmp.mapping.select_next_item(),
+    ["<C-p>"] = cmp.mapping.select_prev_item {
+      behavior = cmp.SelectBehavior.Insert,
+    },
+    ["<C-n>"] = cmp.mapping.select_next_item {
+      behavior = cmp.SelectBehavior.Insert,
+    },
     ["<C-S-f>"] = cmp.mapping.scroll_docs(-4),
     ["<C-f>"] = cmp.mapping.scroll_docs(4),
     ["<C-Space>"] = cmp.mapping.complete(),
-    ["<C-e>"] = cmp.mapping.close(),
+    ["<C-e>"] = cmp.mapping.abort(),
     ["<Tab>"] = vim.schedule_wrap(function(fallback)
       if cmp.visible() and has_words_before() then
         cmp.select_next_item { behavior = cmp.SelectBehavior.Select }
@@ -46,14 +54,14 @@ cmp.setup {
     end, { "i", "s" }),
   },
 
-  sources = {
-    { name = "copilot", group_index = 1 },
-    { name = "nvim_lsp", group_index = 1 },
-    { name = "nvim_lsp_signature_help", group_index = 1 },
-    { name = "nvim_lua", keyword_length = 2 },
-    { name = "treesitter", group_index = 2 },
-    { name = "buffer", group_index = 3 },
-    { name = "vsnip", keyword_length = 2 },
+  sources = cmp.config.sources {
+    { name = "copilot" },
+    { name = "nvim_lsp" },
+    { name = "nvim_lsp_signature_help" },
+    { name = "nvim_lua" },
+    { name = "treesitter" },
+    { name = "buffer" },
+    { name = "vsnip" },
     { name = "path" },
   },
 

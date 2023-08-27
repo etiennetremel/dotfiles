@@ -44,3 +44,6 @@ map(mode.normal, "<leader>nf", ":NvimTreeFindFileToggle<CR>")
 
 -- ZenMode
 map(mode.normal, "<leader>z", ":ZenMode<CR>")
+
+-- NeoTest
+-- map(mod.normal, "<leader>t", "")

@@ -5,8 +5,13 @@ require("telescope").setup {
       ".embuild/.*",
       ".git/.*",
       "__pycache__",
+      "cargo.lock",
+      "dist-types/.*",
+      "dist/.*",
+      "go.sum",
       "node_modules",
       "terraform.d",
+      "yarn.lock",
     },
   },
 }

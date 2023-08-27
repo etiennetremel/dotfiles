@@ -20,6 +20,16 @@ local opts = {
   flags = {
     debounce_text_changes = 150,
   },
+
+  -- ESLint
+  servers = {
+    eslint = {
+      settings = {
+        -- helps eslint find the eslintrc when it's placed in a subfolder instead of the cwd root
+        workingDirectory = { mode = "auto" },
+      },
+    },
+  },
 }
 
 lsp_signature.setup {

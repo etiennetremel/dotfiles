@@ -41,11 +41,13 @@ local function keymappings(client, bufnr)
 
   local keymap_g = {
     name = "Goto",
-    d = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Definition" },
     D = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Declaration" },
+    I = { "<cmd>Telescope lsp_implementations<cr>", "Goto Implementation" },
+    K = { "<cmd>vim.lsp.buf.signature_help", "Signature Help" },
+    d = { "<cmd>Telescope lsp_definitions<cr>", "Goto Definition" },
+    r = { "<cmd>Telescope lsp_references<cr>", "References" },
     s = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Signature Help" },
-    I = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Goto Implementation" },
-    t = { "<cmd>lua vim.lsp.buf.type_definition()<CR>", "Goto Type Definition" },
+    t = { "<cmd>Telescope lsp_type_definitions<cr>", "Goto T[y]pe Definition" },
   }
   whichkey.register(keymap_l, { buffer = bufnr, prefix = "<leader>" })
   whichkey.register(keymap_g, { buffer = bufnr, prefix = "g" })
