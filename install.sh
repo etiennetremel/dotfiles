@@ -12,10 +12,15 @@ DOTFILES=$HOME/dotfiles
 #   zsh-autosuggestions \
 #   zsh-history-substring-search \
 #   starship \
+#   luarocks \
+#   taplo \
 #   neovim
 #
 # echo "Installing python dependencies..."
 # python3 -m pip install --user --upgrade pynvim
+#
+# echo "Installing themes..."
+# git clone https://github.com/alacritty/alacritty-theme alacritty/themes
 #
 # echo "Installing dotfiles..."
 
@@ -31,7 +36,7 @@ echo "Done."
 echo "
 ===================================
  Install nvim plugins
-   $ nvim +PackerInstall
+   $ nvim
  Install Tmux plugins:
    1. enter tmux
    2. press CTRL + B, I

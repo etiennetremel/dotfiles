@@ -112,13 +112,47 @@ require("lazy").setup {
     end,
   },
 
+  {
+    "ray-x/go.nvim",
+    dependencies = { -- optional packages
+      "ray-x/guihua.lua",
+      "neovim/nvim-lspconfig",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    config = function()
+      require("go").setup()
+    end,
+    event = { "CmdlineEnter" },
+    ft = { "go", "gomod" },
+    build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
+  },
+
   -- indentation visual feedback
   {
     "lukas-reineke/indent-blankline.nvim",
-    event = "VeryLazy",
-    config = function()
-      require "setup.indent"
-    end,
+    main = "ibl",
+    event = { "BufReadPost", "BufNewFile" },
+    opts = {
+      indent = {
+        char = "┊",
+        tab_char = "│",
+      },
+      scope = { enabled = false },
+      exclude = {
+        filetypes = {
+          "help",
+          "alpha",
+          "dashboard",
+          "neo-tree",
+          "Trouble",
+          "lazy",
+          "mason",
+          "notify",
+          "toggleterm",
+          "lazyterm",
+        },
+      },
+    },
   },
 
   -- Zen
@@ -157,7 +191,13 @@ require("lazy").setup {
   },
 
   -- Which-key
-  { "folke/which-key.nvim", event = "VeryLazy" },
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      { "echasnovski/mini.nvim", version = false },
+    },
+  },
 
   -- Test report/coverage
   -- {
@@ -186,8 +226,11 @@ require("lazy").setup {
   -- },
 
   -- Improved rust experience
-  -- { "simrat39/rust-tools.nvim", event = "VeryLazy" },
-  { "rust-lang/rust.vim", event = "VeryLazy" },
+  {
+    "mrcjkb/rustaceanvim",
+    event = "VeryLazy",
+    ft = { "rust" },
+  },
 
   -- LSP
   {
@@ -201,6 +244,7 @@ require("lazy").setup {
       "williamboman/mason.nvim",
       "ray-x/lsp_signature.nvim",
       "hrsh7th/cmp-nvim-lsp",
+      "folke/which-key.nvim",
     },
     config = function()
       require "setup.mason_lsp"
@@ -208,14 +252,14 @@ require("lazy").setup {
   },
 
   -- GitHub Copilot
-  {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    event = "InsertEnter",
-    config = function()
-      require "setup.copilot"
-    end,
-  },
+  -- {
+  --   "zbirenbaum/copilot.lua",
+  --   cmd = "Copilot",
+  --   event = "InsertEnter",
+  --   config = function()
+  --     require "setup.copilot"
+  --   end,
+  -- },
 
   -- Autocompletion
   {
@@ -233,13 +277,13 @@ require("lazy").setup {
       { "ray-x/cmp-treesitter", dependencies = "nvim-cmp" },
       { "hrsh7th/cmp-vsnip", dependencies = "nvim-cmp" },
       { "hrsh7th/vim-vsnip", dependencies = "nvim-cmp" },
-      {
-        "zbirenbaum/copilot-cmp",
-        dependencies = { "copilot.lua" },
-        config = function()
-          require("copilot_cmp").setup()
-        end,
-      },
+      -- {
+      --   "zbirenbaum/copilot-cmp",
+      --   dependencies = { "copilot.lua" },
+      --   config = function()
+      --     require("copilot_cmp").setup()
+      --   end,
+      -- },
 
       -- auto close opening brackets
       {

@@ -4,6 +4,7 @@ require("telescope").setup {
     file_ignore_patterns = {
       ".embuild/.*",
       ".git/.*",
+      "Cargo.lock",
       "__pycache__",
       "cargo.lock",
       "dist-types/.*",

@@ -1,49 +1,101 @@
 local mode = require("consts").modes
-local map = require("utils").map
 
 vim.g.mapleader = ","
 
 -- Toggle spelling
-map(mode.visual_select, "<leader>ss", '"spell!<CR>')
+vim.keymap.set(
+  mode.visual_select,
+  "<leader>ss",
+  '"spell!<CR>',
+  { noremap = true }
+)
 
 -- No highlight
-map(mode.normal, "<leader><CR>", ":nohlsearch<CR>")
+vim.keymap.set(
+  mode.normal,
+  "<leader><CR>",
+  ":nohlsearch<CR>",
+  { noremap = true }
+)
 
 -- Diffview
-map(mode.normal, "<leader>g", ":DiffviewOpen<CR>")
+vim.keymap.set(
+  mode.normal,
+  "<leader>g",
+  ":DiffviewOpen<CR>",
+  { noremap = true }
+)
 
 -- Copy/paste
-map(mode.visual_select, "<leader>c", '"*yy<CR>')
-map(mode.normal, "<leader>v", '"+p<CR>')
+vim.keymap.set(mode.visual_select, "<leader>c", '"*yy<CR>', { noremap = true })
+vim.keymap.set(mode.normal, "<leader>v", '"+p<CR>', { noremap = true })
 
 -- Comments
-map(
+vim.keymap.set(
   mode.visual_select,
   "<leader>c<space>",
-  "<Plug>(comment_toggle_linewise_visual)"
+  "<Plug>(comment_toggle_linewise_visual)",
+  { noremap = true }
 )
-map(mode.normal, "<leader>c<space>", "<Plug>(comment_toggle_linewise_current)")
+vim.keymap.set(
+  mode.normal,
+  "<leader>c<space>",
+  "<Plug>(comment_toggle_linewise_current)",
+  { noremap = true }
+)
 
 -- Tab nav
-map(mode.normal, "<leader>n", "gt")
-map(mode.normal, "<leader>N", "gT")
+vim.keymap.set(mode.normal, "<leader>n", "gt", { noremap = true })
+vim.keymap.set(mode.normal, "<leader>N", "gT", { noremap = true })
 
 -- Gundo
-map(mode.normal, "<F5>", ":GundoToggle<CR>")
+vim.keymap.set(mode.normal, "<F5>", ":GundoToggle<CR>", { noremap = true })
 
 -- Telescope
-map(mode.normal, "<leader>p", ":Telescope find_files hidden=true<CR>")
-map(mode.normal, "<leader>f", ":Telescope live_grep<CR>")
-map(mode.normal, "<leader>s", ":Telescope grep_string<CR>")
-map(mode.normal, "<leader>b", ":Telescope buffers<CR>")
-map(mode.normal, "<leader>h", ":Telescope help_tags<CR>")
+vim.keymap.set(
+  mode.normal,
+  "<leader>p",
+  ":Telescope find_files hidden=true<CR>",
+  { noremap = true }
+)
+vim.keymap.set(
+  mode.normal,
+  "<leader>f",
+  ":Telescope live_grep<CR>",
+  { noremap = true }
+)
+vim.keymap.set(
+  mode.normal,
+  "<leader>s",
+  ":Telescope grep_string<CR>",
+  { noremap = true }
+)
+vim.keymap.set(
+  mode.normal,
+  "<leader>b",
+  ":Telescope buffers<CR>",
+  { noremap = true }
+)
+vim.keymap.set(
+  mode.normal,
+  "<leader>h",
+  ":Telescope help_tags<CR>",
+  { noremap = true }
+)
 
 -- Nvim Tree
-map(mode.normal, "<leader>nn", ":NvimTreeToggle<CR>")
-map(mode.normal, "<leader>nf", ":NvimTreeFindFileToggle<CR>")
+vim.keymap.set(
+  mode.normal,
+  "<leader>nn",
+  ":NvimTreeToggle<CR>",
+  { noremap = true }
+)
+vim.keymap.set(
+  mode.normal,
+  "<leader>nf",
+  ":NvimTreeFindFileToggle<CR>",
+  { noremap = true }
+)
 
 -- ZenMode
-map(mode.normal, "<leader>z", ":ZenMode<CR>")
-
--- NeoTest
--- map(mod.normal, "<leader>t", "")
+vim.keymap.set(mode.normal, "<leader>z", ":ZenMode<CR>", { noremap = true })

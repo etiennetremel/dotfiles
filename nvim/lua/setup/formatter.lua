@@ -32,6 +32,10 @@ require("formatter").setup {
       require("formatter.filetypes.python").black,
     },
 
+    toml = {
+      require("formatter.filetypes.toml").taplo,
+    },
+
     -- yaml = {
     --   require("formatter.filetypes.yaml").pyaml,
     -- },
