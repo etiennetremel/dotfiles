@@ -327,4 +327,13 @@ require("lazy").setup {
       require "setup.todo_comments"
     end,
   },
+
+  -- Kubectl
+  {
+    "ramilito/kubectl.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("kubectl").setup()
+    end,
+  },
 }

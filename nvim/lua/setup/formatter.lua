@@ -36,9 +36,18 @@ require("formatter").setup {
       require("formatter.filetypes.toml").taplo,
     },
 
-    -- yaml = {
-    --   require("formatter.filetypes.yaml").pyaml,
-    -- },
+    yaml = {
+      function()
+        return {
+          exe = "yamlfmt",
+          args = {
+            "-formatter retain_line_breaks=true",
+            "-in",
+          },
+          stdin = true,
+        }
+      end,
+    },
 
     -- Use the special "*" filetype for defining formatter configurations on
     -- any filetype

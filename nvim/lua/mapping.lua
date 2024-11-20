@@ -97,5 +97,12 @@ vim.keymap.set(
   { noremap = true }
 )
 
+vim.keymap.set(
+  mode.normal,
+  "<leader>k",
+  '<cmd>lua require("kubectl").toggle()<cr>',
+  { noremap = true, silent = true }
+)
+
 -- ZenMode
 vim.keymap.set(mode.normal, "<leader>z", ":ZenMode<CR>", { noremap = true })

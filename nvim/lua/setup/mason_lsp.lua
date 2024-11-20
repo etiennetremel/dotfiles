@@ -8,7 +8,7 @@ require("mason-lspconfig").setup {
     "lua_ls",
     "pyright",
     "terraformls",
-    "tsserver",
+    "ts_ls",
   },
   automatic_installation = false,
   handlers = nil,
