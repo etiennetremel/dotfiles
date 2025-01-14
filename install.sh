@@ -4,32 +4,36 @@ set -e
 
 DOTFILES=$HOME/dotfiles
 
-# echo "Installing dependencies..."
-# brew install \
-#   fg \
-#   ripgrep \
-#   fzf \
-#   zsh-autosuggestions \
-#   zsh-history-substring-search \
-#   starship \
-#   luarocks \
-#   taplo \
-#   neovim
-#
-# echo "Installing python dependencies..."
-# python3 -m pip install --user --upgrade pynvim
-#
-# echo "Installing themes..."
-# git clone https://github.com/alacritty/alacritty-theme alacritty/themes
-#
-# echo "Installing dotfiles..."
+echo "Installing ohmyzsh..."
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+echo "Installing python dependencies..."
+python3 -m pip install --user --upgrade pynvim
+
+echo "Installing themes..."
+git clone https://github.com/alacritty/alacritty-theme alacritty/themes
+
+echo "Installing TMUX TPM..."
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+echo "Installing NVM.."
+git clone https://github.com/nvm-sh/nvm.git ~/.nvm
+
+echo "Installing dotfiles..."
 
 echo "
 Creating symlinks
 ==================================="
-ln -s $DOTFILES/alacritty/ ~/.config/alacritty
-ln -s $DOTFILES/nvim/ ~/.config/nvim
-ln -s $DOTFILES/tmux.conf ~/.tmux.conf
+mkdir -p ~/.config
+
+ln -s $DOTFILES/alacritty/ ~/.config
+ln -s $DOTFILES/nvim/ ~/.config
+ln -s $DOTFILES/tmux/tmux.conf ~/.tmux.conf
+ln -s $DOTFILES/Brewfile ~/Brewfile
+ln -s $DOTFILES/starship/starship.toml ~/.config/starship.toml
+
+echo "Installing Brew dependencies..."
+brew bundle
 
 echo "Done."
 

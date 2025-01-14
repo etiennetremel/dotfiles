@@ -401,7 +401,7 @@ mods = "Alt|Shift"
 
 [terminal.shell]
 args = ["new-session", "-A", "-D", "-s", "main"]
-program = "/usr/local/opt/tmux/bin/tmux"
+program = "/opt/homebrew/bin/tmux"
 
 [window.padding]
 x = 2

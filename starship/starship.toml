@@ -1,0 +1,9 @@
+# [azure]
+# disabled = false
+# format = 'on [$symbol($subscription)]($style) '
+# symbol = '󰠅 '
+# style = 'blue bold'
+#
+# [directory]
+# truncation_length = 8
+# truncation_symbol = '…/'
