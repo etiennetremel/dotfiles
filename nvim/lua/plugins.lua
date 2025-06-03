@@ -75,22 +75,11 @@ require("lazy").setup {
     build = "make",
   },
 
-  -- git diff
   {
-    "sindrets/diffview.nvim",
+    "lewis6991/gitsigns.nvim",
     event = "VeryLazy",
     config = function()
-      require "setup.diffview"
-    end,
-    dependencies = "nvim-lua/plenary.nvim",
-  },
-
-  -- git visual feedback
-  {
-    "airblade/vim-gitgutter",
-    event = "VeryLazy",
-    config = function()
-      require "setup.gitgutter"
+      require "setup.gitsign"
     end,
   },
 
@@ -132,30 +121,12 @@ require("lazy").setup {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
     event = { "BufReadPost", "BufNewFile" },
-    opts = {
-      indent = {
-        char = "┊",
-        tab_char = "│",
-      },
-      scope = { enabled = false },
-      exclude = {
-        filetypes = {
-          "help",
-          "alpha",
-          "dashboard",
-          "neo-tree",
-          "Trouble",
-          "lazy",
-          "mason",
-          "notify",
-          "toggleterm",
-          "lazyterm",
-        },
-      },
-    },
+    config = function()
+      require "setup.indent_blankline"
+    end,
   },
 
-  -- Zen
+  -- zen
   {
     "folke/zen-mode.nvim",
     event = "VeryLazy",
@@ -164,7 +135,7 @@ require("lazy").setup {
     end,
   },
 
-  -- Scroll direction visual feedback
+  -- scroll direction visual feedback
   {
     "gen740/SmoothCursor.nvim",
     event = "VeryLazy",
@@ -173,11 +144,13 @@ require("lazy").setup {
     end,
   },
 
-  -- Colorscheme
+  -- catppuccin colorscheme
   {
-    "folke/tokyonight.nvim",
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000,
     config = function()
-      require "setup.colorscheme"
+      require "setup.catppuccin"
     end,
   },
 
@@ -190,7 +163,7 @@ require("lazy").setup {
     end,
   },
 
-  -- Which-key
+  -- which-key
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
@@ -225,7 +198,7 @@ require("lazy").setup {
   --   end,
   -- },
 
-  -- Improved rust experience
+  -- improved rust experience
   {
     "mrcjkb/rustaceanvim",
     event = "VeryLazy",
@@ -238,10 +211,10 @@ require("lazy").setup {
     event = "VeryLazy",
     dependencies = {
       {
-        "williamboman/mason-lspconfig.nvim",
-        dependencies = "williamboman/mason.nvim",
+        "mason-org/mason-lspconfig.nvim",
+        dependencies = "mason-org/mason.nvim",
       },
-      "williamboman/mason.nvim",
+      "mason-org/mason.nvim",
       "ray-x/lsp_signature.nvim",
       "hrsh7th/cmp-nvim-lsp",
       "folke/which-key.nvim",
@@ -261,7 +234,7 @@ require("lazy").setup {
   --   end,
   -- },
 
-  -- Autocompletion
+  -- autocompletion
   {
     "hrsh7th/nvim-cmp",
     event = "VeryLazy",
@@ -328,6 +301,16 @@ require("lazy").setup {
     end,
   },
 
+  -- Todo files
+  {
+    "bngarren/checkmate.nvim",
+    ft = "markdown", -- Lazy loads for Markdown files matching patterns in 'files'
+    opts = {
+      -- your configuration here
+      -- or leave empty to use defaults
+    },
+  },
+
   -- Kubectl
   {
     "ramilito/kubectl.nvim",
@@ -335,5 +318,59 @@ require("lazy").setup {
     config = function()
       require("kubectl").setup()
     end,
+  },
+
+  -- Tapr
+  -- {
+  --   "nvzone/typr",
+  --   dependencies = "nvzone/volt",
+  --   opts = {},
+  --   cmd = { "Typr", "TyprStats" },
+  -- },
+
+  -- Avante AI
+  {
+    "yetone/avante.nvim",
+    event = "VeryLazy",
+    version = false, -- Never set this value to "*"! Never!
+    build = "make",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "stevearc/dressing.nvim",
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      --- The below dependencies are optional,
+      "echasnovski/mini.pick", -- for file_selector provider mini.pick
+      "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
+      "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
+      "ibhagwan/fzf-lua", -- for file_selector provider fzf
+      "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+      -- "zbirenbaum/copilot.lua", -- for providers='copilot'
+      -- {
+      --   -- support for image pasting
+      --   "HakonHarnes/img-clip.nvim",
+      --   event = "VeryLazy",
+      --   opts = {
+      --     -- recommended settings
+      --     default = {
+      --       embed_image_as_base64 = false,
+      --       prompt_for_file_name = false,
+      --       drag_and_drop = {
+      --         insert_mode = true,
+      --       },
+      --       -- required for Windows users
+      --       use_absolute_path = true,
+      --     },
+      --   },
+      -- },
+      -- {
+      --   -- Make sure to set this up properly if you have lazy=true
+      --   "MeanderingProgrammer/render-markdown.nvim",
+      --   opts = {
+      --     file_types = { "markdown", "Avante" },
+      --   },
+      --   ft = { "markdown", "Avante" },
+      -- },
+    },
   },
 }

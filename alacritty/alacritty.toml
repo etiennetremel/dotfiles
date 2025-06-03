@@ -410,4 +410,5 @@ y = 2
 [general]
 import = ["~/.config/alacritty/themes/themes/tokyo-night.toml"]
 
-[terminal]
+[env]
+TERM = "xterm-256color"
