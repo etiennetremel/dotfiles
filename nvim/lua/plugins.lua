@@ -305,10 +305,6 @@ require("lazy").setup {
   {
     "bngarren/checkmate.nvim",
     ft = "markdown", -- Lazy loads for Markdown files matching patterns in 'files'
-    opts = {
-      -- your configuration here
-      -- or leave empty to use defaults
-    },
   },
 
   -- Kubectl
@@ -334,6 +330,9 @@ require("lazy").setup {
     event = "VeryLazy",
     version = false, -- Never set this value to "*"! Never!
     build = "make",
+    config = function()
+      require "setup.avante"
+    end,
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
       "stevearc/dressing.nvim",
