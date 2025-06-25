@@ -33,7 +33,7 @@ require("lazy").setup {
     end,
     dependencies = {
       "nvim-tree/nvim-web-devicons",
-      "folke/tokyonight.nvim",
+      "catppuccin/nvim",
     },
   },
 
@@ -75,11 +75,12 @@ require("lazy").setup {
     build = "make",
   },
 
+  -- git diff
   {
     "lewis6991/gitsigns.nvim",
     event = "VeryLazy",
     config = function()
-      require "setup.gitsign"
+      require "setup.gitsigns"
     end,
   },
 
@@ -151,6 +152,15 @@ require("lazy").setup {
     priority = 1000,
     config = function()
       require "setup.catppuccin"
+    end,
+  },
+
+  -- colorize hex codes
+  {
+    "catgoose/nvim-colorizer.lua",
+    event = "BufReadPre",
+    config = function()
+      require("colorizer").setup()
     end,
   },
 

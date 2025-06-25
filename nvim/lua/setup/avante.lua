@@ -1,7 +1,7 @@
 local opts = {
   -- add any opts here
   -- for example
-  provider = "openrouter_claude_opus_4",
+  provider = "openrouter_gemini_flash_thinking",
   providers = {
     openai = {
       endpoint = "https://api.openai.com/v1",
@@ -13,17 +13,23 @@ local opts = {
         --reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
       },
     },
-    openrouter_gemini_2_5_pro = {
+    openrouter_gemini_pro = {
       __inherited_from = "openai",
       endpoint = "https://openrouter.ai/api/v1",
       api_key_name = "OPENROUTER_API_KEY",
       model = "google/gemini-2.5-pro-preview",
     },
-    openrouter_gemini_2_flash = {
+    openrouter_gemini_flash = {
       __inherited_from = "openai",
       endpoint = "https://openrouter.ai/api/v1",
       api_key_name = "OPENROUTER_API_KEY",
-      model = "google/gemini-2.0-flash-001",
+      model = "google/gemini-2.5-flash-preview-05-20",
+    },
+    openrouter_gemini_flash_thinking = {
+      __inherited_from = "openai",
+      endpoint = "https://openrouter.ai/api/v1",
+      api_key_name = "OPENROUTER_API_KEY",
+      model = "google/gemini-2.5-flash-preview-05-20:thinking",
     },
     openrouter_qwen3_235b_a22b = {
       __inherited_from = "openai",
@@ -50,7 +56,7 @@ local opts = {
       model = "openai/gpt-4.1",
     },
   },
-  auto_suggestions_provider = "openrouter_gemini_2_flash",
+  auto_suggestions_provider = "openrouter_gemini_flash",
 }
 
 require("avante").setup(opts)

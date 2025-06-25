@@ -12,8 +12,16 @@ require("formatter").setup {
       require("formatter.filetypes.lua").stylua,
     },
 
+    css = {
+      require("formatter.filetypes.css").prettier,
+    },
+
     go = {
       require("formatter.filetypes.go").gofmt,
+    },
+
+    html = {
+      require("formatter.filetypes.html").prettier,
     },
 
     rust = {
@@ -22,6 +30,10 @@ require("formatter").setup {
 
     typescript = {
       require("formatter.filetypes.typescript").prettier,
+    },
+
+    typescriptreact = {
+      require("formatter.filetypes.typescriptreact").prettier,
     },
 
     terraform = {

@@ -43,6 +43,15 @@ vim.keymap.set(mode.normal, "<leader>N", "gT", { noremap = true })
 -- Gundo
 vim.keymap.set(mode.normal, "<F5>", ":GundoToggle<CR>", { noremap = true })
 
+-- GitSign
+vim.keymap.set(
+  mode.normal,
+  "<leader>d",
+  ":Gitsigns diffthis<CR>",
+  { noremap = true }
+)
+vim.keymap.set(mode.normal, "<leader>q", ":bd<CR>", { noremap = true })
+
 -- Telescope
 vim.keymap.set(
   mode.normal,
@@ -66,12 +75,6 @@ vim.keymap.set(
   mode.normal,
   "<leader>b",
   ":Telescope buffers<CR>",
-  { noremap = true }
-)
-vim.keymap.set(
-  mode.normal,
-  "<leader>h",
-  ":Telescope help_tags<CR>",
   { noremap = true }
 )
 
