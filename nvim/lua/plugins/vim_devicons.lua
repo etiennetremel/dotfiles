@@ -21,3 +21,8 @@ local pattern_symbols = {
 vim.g.WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = extension_symbols
 vim.g.WebDevIconsUnicodeDecorateFileNodesPatternSymbols = pattern_symbols
 vim.g.DevIconsEnableFoldersOpenClose = 1
+
+return {
+  "ryanoasis/vim-devicons",
+  event = "VeryLazy",
+}

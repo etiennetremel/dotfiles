@@ -2,3 +2,4 @@ nvim/plugin/
 nvim/spell/
 nvim/typrstats/
 alacritty/themes
+.DS_Store
