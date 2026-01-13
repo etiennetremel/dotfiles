@@ -28,16 +28,21 @@ return {
           require("formatter.filetypes.html").prettier,
         },
 
-        rust = {
-          function()
-            return {
-              exe = "cargo",
-              args = { "fmt" },
-              stdin = true,
-            }
-          end,
+        svelte = {
+          require("formatter.defaults").biome,
         },
 
+        -- Disabled for now, using rustacean
+        -- rust = {
+        --   function()
+        --     return {
+        --       exe = "cargo",
+        --       args = { "fmt" },
+        --       stdin = true,
+        --     }
+        --   end,
+        -- },
+        --
         typescript = {
           require("formatter.filetypes.typescript").biome,
         },

@@ -27,7 +27,6 @@ opt.ruler = true
 opt.cursorline = true
 opt.laststatus = 3
 
-opt.lazyredraw = true -- don't redraw while executing macros (good performance config)
 opt.foldcolumn = "1" -- add a bit extra margin to the left
 
 -- Tab control

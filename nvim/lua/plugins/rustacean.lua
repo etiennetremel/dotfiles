@@ -1,5 +1,5 @@
 return {
   "mrcjkb/rustaceanvim",
-  event = "VeryLazy",
-  ft = { "rust" },
+  lazy = false,
+  version = "^6",
 }

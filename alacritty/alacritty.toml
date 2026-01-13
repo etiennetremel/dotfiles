@@ -3,6 +3,11 @@
 family = "mononoki Nerd Font Mono"
 
 [[keyboard.bindings]]
+chars = "\u001b[13;2u"
+key = "Return"
+mods = "Shift"
+
+[[keyboard.bindings]]
 chars = "\u001B[1;5A"
 key = "Up"
 mods = "Alt"

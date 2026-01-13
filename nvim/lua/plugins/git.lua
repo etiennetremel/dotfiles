@@ -13,7 +13,7 @@ vim.api.nvim_create_autocmd("WinEnter", {
       -- 1) Remember which windows are in diff now
       local diffwins = {}
       for _, w in ipairs(wins) do
-        if vim.api.nvim_win_get_option(w, "diff") then
+        if vim.wo[w].diff then
           table.insert(diffwins, w)
         end
       end
