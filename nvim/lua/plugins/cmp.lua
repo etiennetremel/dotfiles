@@ -58,7 +58,6 @@ return {
       },
 
       sources = cmp.config.sources {
-        { name = "copilot" },
         { name = "nvim_lsp" },
         { name = "nvim_lsp_signature_help" },
         { name = "nvim_lua" },
@@ -97,13 +96,6 @@ return {
     { "ray-x/cmp-treesitter", dependencies = "nvim-cmp" },
     { "hrsh7th/cmp-vsnip", dependencies = "nvim-cmp" },
     { "hrsh7th/vim-vsnip", dependencies = "nvim-cmp" },
-    -- {
-    --   "zbirenbaum/copilot-cmp",
-    --   dependencies = { "copilot.lua" },
-    --   config = function()
-    --     require("copilot_cmp").setup()
-    --   end,
-    -- },
 
     -- auto close opening brackets
     {

@@ -5,14 +5,20 @@ return {
     -- Required for `snacks` provider.
     ---@module 'snacks' <- Loads `snacks.nvim` types for configuration intellisense.
     { "folke/snacks.nvim", opts = { input = {}, picker = {}, terminal = {} } },
+    {
+      "e-cal/opencode-tmux.nvim",
+      ts = {
+        options = "-h",
+        focus = false,
+        auto_close = false,
+        allow_passthrough = false,
+        find_sibling = true,
+      },
+    },
   },
   config = function()
     ---@type opencode.Opts
-    vim.g.opencode_opts = {
-      provider = {
-        enabled = "tmux",
-      },
-    }
+    vim.g.opencode_opts = {}
 
     -- Required for `opts.events.reload`.
     vim.o.autoread = true
@@ -20,7 +26,7 @@ return {
     -- Recommended/example keymaps.
     vim.keymap.set({ "n", "x" }, "<C-a>", function()
       require("opencode").ask("@this: ", { submit = true })
-    end, { desc = "Ask opencode" })
+    end, { desc = "Ask opencode…" })
     vim.keymap.set({ "n", "x" }, "<C-x>", function()
       require("opencode").select()
     end, { desc = "Execute opencode action…" })
@@ -30,20 +36,30 @@ return {
 
     vim.keymap.set({ "n", "x" }, "go", function()
       return require("opencode").operator "@this "
-    end, { expr = true, desc = "Add range to opencode" })
+    end, { desc = "Add range to opencode", expr = true })
     vim.keymap.set("n", "goo", function()
       return require("opencode").operator "@this " .. "_"
-    end, { expr = true, desc = "Add line to opencode" })
+    end, { desc = "Add line to opencode", expr = true })
 
     vim.keymap.set("n", "<S-C-u>", function()
       require("opencode").command "session.half.page.up"
-    end, { desc = "opencode half page up" })
+    end, { desc = "Scroll opencode up" })
     vim.keymap.set("n", "<S-C-d>", function()
       require("opencode").command "session.half.page.down"
-    end, { desc = "opencode half page down" })
+    end, { desc = "Scroll opencode down" })
 
-    -- You may want these if you stick with the opinionated "<C-a>" and "<C-x>" above — otherwise consider "<leader>o".
-    vim.keymap.set("n", "+", "<C-a>", { desc = "Increment", noremap = true })
-    vim.keymap.set("n", "-", "<C-x>", { desc = "Decrement", noremap = true })
+    -- You may want these if you use the opinionated `<C-a>` and `<C-x>` keymaps above — otherwise consider `<leader>o…` (and remove terminal mode from the `toggle` keymap)
+    vim.keymap.set(
+      "n",
+      "+",
+      "<C-a>",
+      { desc = "Increment under cursor", noremap = true }
+    )
+    vim.keymap.set(
+      "n",
+      "-",
+      "<C-x>",
+      { desc = "Decrement under cursor", noremap = true }
+    )
   end,
 }

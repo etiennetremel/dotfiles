@@ -32,6 +32,10 @@ return {
           require("formatter.defaults").biome,
         },
 
+        json = {
+          require("formatter.defaults").biome,
+        },
+
         -- Disabled for now, using rustacean
         -- rust = {
         --   function()
@@ -86,11 +90,11 @@ return {
       },
     }
 
-    vim.cmd [[
-  augroup FormatAutogroup
-    autocmd!
-    autocmd BufWritePost * FormatWrite
-  augroup END
-]]
+    vim.api.nvim_create_augroup("FormatAutogroup", { clear = true })
+    vim.api.nvim_create_autocmd("BufWritePost", {
+      group = "FormatAutogroup",
+      pattern = "*",
+      command = "FormatWrite",
+    })
   end,
 }

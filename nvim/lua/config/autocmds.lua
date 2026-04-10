@@ -33,21 +33,33 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   end,
 })
 
-vim.cmd [[
-  autocmd FileType html :setlocal sw=2 ts=2 sts=2
-  autocmd FileType ruby :setlocal sw=2 ts=2 sts=2
-  autocmd FileType javascript :setlocal sw=2 ts=2 sts=2
-  autocmd FileType xml :setlocal sw=2 ts=2 sts=2
-  autocmd FileType python :setlocal sw=4 ts=4 sts=4
-  autocmd FileType go :setlocal sw=4 ts=4 sts=4
-  autocmd FileType rust :setlocal sw=4 ts=4 sts=4
-]]
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup "filetype_indent",
+  pattern = { "html", "ruby", "javascript", "xml" },
+  callback = function()
+    vim.bo.shiftwidth = 2
+    vim.bo.tabstop = 2
+    vim.bo.softtabstop = 2
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup "filetype_indent_wide",
+  pattern = { "python", "go", "rust" },
+  callback = function()
+    vim.bo.shiftwidth = 4
+    vim.bo.tabstop = 4
+    vim.bo.softtabstop = 4
+  end,
+})
 
 -- Fixed column for diagnostics to appear
+vim.opt.signcolumn = "yes"
+
 -- Show autodiagnostic popup on cursor hover_range
--- Goto previous / next diagnostic warning / error
--- Show inlay_hints more frequently
-vim.cmd [[
-  set signcolumn=yes
-  autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
-]]
+vim.api.nvim_create_autocmd("CursorHold", {
+  group = augroup "diagnostic_float",
+  callback = function()
+    vim.diagnostic.open_float(nil, { focusable = false })
+  end,
+})

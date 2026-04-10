@@ -12,16 +12,14 @@ return {
         gitsigns = true,
         indent_blankline = { enabled = true },
         mason = true,
-        markdown = true,
         telescope = true,
-        treesitter = true,
         treesitter_context = true,
         which_key = true,
       },
     },
     config = function()
       -- Load the colorscheme
-      vim.cmd [[colorscheme catppuccin]]
+      vim.cmd.colorscheme "catppuccin-nvim"
     end,
   },
 
@@ -32,7 +30,7 @@ return {
     config = function()
       require("lualine").setup {
         options = {
-          theme = "catppuccin",
+          theme = "catppuccin-nvim",
         },
         extensions = { "nvim-tree" },
       }

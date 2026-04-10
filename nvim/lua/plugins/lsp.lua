@@ -57,6 +57,18 @@ return {
 
         -- Information
         vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+
+        -- Code actions and refactoring
+        vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+        vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+        vim.keymap.set("n", "<leader>cf", function()
+          vim.lsp.buf.format { async = true }
+        end, opts)
+
+        -- Diagnostics navigation
+        vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
+        vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+        vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
       end,
     })
   end,
