@@ -59,6 +59,10 @@ return {
           require("formatter.filetypes.terraform").terraformfmt,
         },
 
+        ["terraform-vars"] = {
+          require("formatter.filetypes.terraform").terraformfmt,
+        },
+
         python = {
           require("formatter.filetypes.python").black,
         },
