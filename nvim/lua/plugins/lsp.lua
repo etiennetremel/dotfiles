@@ -7,7 +7,6 @@ return {
       dependencies = "mason-org/mason.nvim",
     },
     "mason-org/mason.nvim",
-    "ray-x/lsp_signature.nvim",
     "hrsh7th/cmp-nvim-lsp",
     "folke/which-key.nvim",
   },

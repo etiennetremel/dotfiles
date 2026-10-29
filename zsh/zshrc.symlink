@@ -64,15 +64,17 @@ HISTSIZE=20000
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+export PATH="$PATH:/opt/homebrew/bin"
 plugins=(
-  ag
-  docker
-  fasd
+  mise
   git
   history-substring-search
   kubectl
+  fzf
+  starship
   thefuck
-  tmux
+  zoxide
+  z
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -108,3 +110,24 @@ export LANG=en_US.UTF-8
 #
 #
 export EDITOR='vim'
+
+alias watch='watch '
+alias vim='nvim'
+
+# Kubernetes
+alias k='kubectl'
+alias kd='kubectl describe'
+alias ke='kubectl exec'
+alias kg='kubectl get'
+alias kl='kubectl logs'
+alias kuc='k config use-context'
+
+_herdr_kube_context() {
+  [[ -n "$HERDR_WORKSPACE_ID" ]] || return
+  herdr workspace report-metadata "$HERDR_WORKSPACE_ID" \
+    --source kubectl \
+    --token "kube_context=$(kubectl config current-context 2>/dev/null)" \
+    >/dev/null 2>&1
+}
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd _herdr_kube_context

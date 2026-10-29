@@ -18,7 +18,7 @@ return {
     cmp.setup {
       snippet = {
         expand = function(args)
-          vim.fn["vsnip#anonymous"](args.body)
+          vim.snippet.expand(args.body)
         end,
       },
 
@@ -41,16 +41,20 @@ return {
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
         ["<C-Space>"] = cmp.mapping.complete(),
         ["<C-e>"] = cmp.mapping.abort(),
-        ["<Tab>"] = vim.schedule_wrap(function(fallback)
+        ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() and has_words_before() then
             cmp.select_next_item { behavior = cmp.SelectBehavior.Select }
+          elseif vim.snippet.active { direction = 1 } then
+            vim.snippet.jump(1)
           else
             fallback()
           end
-        end),
+        end, { "i", "s" }),
         ["<S-Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_prev_item()
+          elseif vim.snippet.active { direction = -1 } then
+            vim.snippet.jump(-1)
           else
             fallback()
           end
@@ -63,7 +67,6 @@ return {
         { name = "nvim_lua" },
         { name = "treesitter" },
         { name = "buffer" },
-        { name = "vsnip" },
         { name = "path" },
       },
 
@@ -77,7 +80,6 @@ return {
         format = function(entry, item)
           local menu_icon = {
             nvim_lsp = "λ",
-            vsnip = "⋗",
             buffer = "Ω",
             path = "🖫",
           }
@@ -94,8 +96,6 @@ return {
     { "hrsh7th/cmp-path", dependencies = "nvim-cmp" },
     { "hrsh7th/cmp-nvim-lua", dependencies = "nvim-cmp" },
     { "ray-x/cmp-treesitter", dependencies = "nvim-cmp" },
-    { "hrsh7th/cmp-vsnip", dependencies = "nvim-cmp" },
-    { "hrsh7th/vim-vsnip", dependencies = "nvim-cmp" },
 
     -- auto close opening brackets
     {

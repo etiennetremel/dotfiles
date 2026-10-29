@@ -10,3 +10,7 @@
 
 [gcloud]
 disabled = true
+
+[kubernetes]
+disabled = false
+style = 'dimmed blue'

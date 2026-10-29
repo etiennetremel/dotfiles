@@ -1,0 +1,4 @@
+font-family = "mononoki Nerd Font Mono"
+theme = TokyoNight
+background = #101014
+command = /opt/homebrew/bin/herdr

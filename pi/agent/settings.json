@@ -1,0 +1,12 @@
+{
+  "lastChangelogVersion": "1.4.0",
+  "hideThinkingBlock": false,
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-6.1-sol",
+  "defaultThinkingLevel": "medium",
+  "packages": [
+    "git:github.com/DietrichGebert/ponytail",
+    "npm:pi-lsp"
+  ],
+  "theme": "dark"
+}

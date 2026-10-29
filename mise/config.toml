@@ -1,0 +1,15 @@
+[tools]
+azure-cli = { version = "latest", python = "3.14" }
+azure-kubelogin = "latest"
+biome = "latest"
+node = "latest"
+python = "latest"
+rust = "latest"
+terraform = "latest"
+"npm:@earendil-works/pi-coding-agent" = "latest"
+"npm:typescript-language-server" = "latest"
+uv = "latest"
+"github:agavra/tuicr" = "latest"
+actionlint = "latest"
+bun = "latest"
+"github:DeusData/codebase-memory-mcp" = "latest"
